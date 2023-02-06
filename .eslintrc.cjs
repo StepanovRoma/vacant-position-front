@@ -59,7 +59,7 @@ module.exports = {
       {
         devDependencies: true,
         optionalDependencies: false,
-        peerDependencies: false,
+        peerDependencies: false
       },
     ],
     'import/no-unresolved': 0,
