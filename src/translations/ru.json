@@ -1,5 +1,5 @@
 {
-  "iAmTranslationPartName": {
-    "iAmTranslationKey": "iAmTranslationExample"
+  "general": {
+    "applicationName": "Vacant Position"
   }
 }
