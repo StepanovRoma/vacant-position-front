@@ -1,15 +1,11 @@
-import { Avatar, Box, styled, Typography } from '@mui/material';
+import { AppBar, Avatar, styled, Toolbar, Typography } from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
-export const HeaderContainer = styled(Box)`
+export const HeaderContainer = styled(AppBar)`
+  position: static;
   height: 119px;
   background-color: ${COLOR_PALETTE.primary};
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 33px;
 `;
 
 export const HeaderTitle = styled(Typography)`
@@ -24,4 +20,8 @@ export const HeaderTitle = styled(Typography)`
 export const HeaderAvatar = styled(Avatar)`
   width: 60px;
   height: 60px;
+`;
+
+export const HeaderToolBar = styled(Toolbar)`
+  justify-content: space-between;
 `;
