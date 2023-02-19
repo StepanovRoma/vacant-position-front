@@ -1,13 +1,9 @@
 import React from 'react';
 import { useI18n } from 'hooks/useI18n';
 import { Menu } from 'components/Menu';
+import { AvatarWithMenu } from 'components/AvatarWithMenu';
 
-import {
-  HeaderAvatar,
-  HeaderContainer,
-  HeaderTitle,
-  HeaderToolBar,
-} from './style';
+import { HeaderContainer, HeaderTitle, HeaderToolBar } from './style';
 
 export const Header = () => {
   const tr = useI18n('general');
@@ -16,8 +12,7 @@ export const Header = () => {
       <HeaderToolBar>
         <Menu />
         <HeaderTitle>{tr('applicationName')}</HeaderTitle>
-        {/*todo work with avatar and dd*/}
-        <HeaderAvatar />
+        <AvatarWithMenu />
       </HeaderToolBar>
     </HeaderContainer>
   );

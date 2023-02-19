@@ -8,5 +8,10 @@
     "mainPage": "Главная страница",
     "myResumes": "Мои резюме",
     "myVacancies": "Мои вакансии"
+  },
+  "avatarMenuItems": {
+    "profile": "Мой профиль",
+    "settings": "Настройки",
+    "logout": "Выйти"
   }
 }

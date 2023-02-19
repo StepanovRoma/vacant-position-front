@@ -1,4 +1,4 @@
-import { AppBar, Avatar, styled, Toolbar, Typography } from '@mui/material';
+import { AppBar, styled, Toolbar, Typography } from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -15,11 +15,6 @@ export const HeaderTitle = styled(Typography)`
   font-weight: 700;
   font-size: 96px;
   line-height: 115px;
-`;
-
-export const HeaderAvatar = styled(Avatar)`
-  width: 60px;
-  height: 60px;
 `;
 
 export const HeaderToolBar = styled(Toolbar)`
