@@ -4,7 +4,7 @@ import { COLOR_PALETTE } from 'constants/theme';
 
 export const HeaderContainer = styled(Box)`
   height: 119px;
-  background-color: ${COLOR_PALETTE.mainColor};
+  background-color: ${COLOR_PALETTE.primary};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,7 +13,7 @@ export const HeaderContainer = styled(Box)`
 `;
 
 export const HeaderTitle = styled(Typography)`
-  color: ${COLOR_PALETTE.tittleColor};
+  color: ${COLOR_PALETTE.deepPurple};
   font-family: 'Gwendolyn', cursive;
   font-style: normal;
   font-weight: 700;
