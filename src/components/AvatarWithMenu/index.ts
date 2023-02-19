@@ -1,0 +1,1 @@
+export { AvatarWithMenu } from './AvatarWithMenu';
