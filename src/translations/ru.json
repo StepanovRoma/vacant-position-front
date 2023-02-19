@@ -1,5 +1,12 @@
 {
   "general": {
-    "applicationName": "Vacant Position"
+    "applicationName": "Vacant Position",
+    "version": "версия 0.0"
+  },
+  "menuItems": {
+    "profile": "Профиль",
+    "mainPage": "Главная страница",
+    "myResumes": "Мои резюме",
+    "myVacancies": "Мои вакансии"
   }
 }
