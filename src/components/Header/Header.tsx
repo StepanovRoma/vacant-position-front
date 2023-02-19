@@ -1,18 +1,24 @@
 import React from 'react';
 import { useI18n } from 'hooks/useI18n';
-import { Box } from '@mui/material';
+import { Menu } from 'components/Menu';
 
-import { HeaderAvatar, HeaderContainer, HeaderTitle } from './style';
+import {
+  HeaderAvatar,
+  HeaderContainer,
+  HeaderTitle,
+  HeaderToolBar,
+} from './style';
 
 export const Header = () => {
   const tr = useI18n('general');
   return (
     <HeaderContainer>
-      {/*todo add menu*/}
-      <Box>{'Menu'}</Box>
-      <HeaderTitle>{tr('applicationName')}</HeaderTitle>
-      {/*todo work with avatar and dd*/}
-      <HeaderAvatar />
+      <HeaderToolBar>
+        <Menu />
+        <HeaderTitle>{tr('applicationName')}</HeaderTitle>
+        {/*todo work with avatar and dd*/}
+        <HeaderAvatar />
+      </HeaderToolBar>
     </HeaderContainer>
   );
 };
