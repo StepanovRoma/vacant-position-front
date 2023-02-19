@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { store } from './store';
-import { App } from './components';
+import { App } from './components/App';
 
 export const router = createBrowserRouter([
   // match everything with "*"

@@ -14,7 +14,6 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:prettier/recommended',
     'prettier',
     // 'react-app',
   ],
@@ -59,7 +58,7 @@ module.exports = {
       {
         devDependencies: true,
         optionalDependencies: false,
-        peerDependencies: false
+        peerDependencies: false,
       },
     ],
     'import/no-unresolved': 0,
@@ -129,7 +128,7 @@ module.exports = {
     'react/jsx-boolean-value': 1,
     'no-debugger': 'warn',
     '@typescript-eslint/no-unused-vars': [
-      'error',
+      'warn',
       {
         argsIgnorePattern: '^_',
       },
