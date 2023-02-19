@@ -40,7 +40,6 @@ export const AvatarWithMenu = () => {
           {avatarMenuTr('profile')}
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}></MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
