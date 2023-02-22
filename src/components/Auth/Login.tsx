@@ -20,8 +20,8 @@ export const Login = () => {
     <PageLayout>
       <AuthContainer>
         <Typography>{tr('login')}</Typography>
-        <InputField label={tr('email')} variant="outlined" />
-        <InputField label={tr('password')} variant="outlined" />
+        <InputField autoComplete="off" label={tr('email')} variant="outlined" />
+        <InputField type="password" label={tr('password')} variant="outlined" />
         <AuthButton variant="contained">{tr('enter')}</AuthButton>
         <LinkContainer>
           <Typography>{tr('registerHelper')}</Typography>
