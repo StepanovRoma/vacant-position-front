@@ -13,5 +13,17 @@
     "profile": "Мой профиль",
     "settings": "Настройки",
     "logout": "Выйти"
+  },
+  "auth": {
+    "login": "Логин",
+    "email": "Почта",
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "confirmPassword": "Повторить пароль",
+    "enter": "Войти",
+    "register": "Регистрация",
+    "loginHelper": "Уже зарегестрированы?",
+    "registerHelper": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться"
   }
 }
