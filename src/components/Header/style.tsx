@@ -13,7 +13,7 @@ export const HeaderTitle = styled(Typography)`
   font-family: 'Gwendolyn', cursive;
   font-style: normal;
   font-weight: 700;
-  font-size: 96px;
+  font-size: clamp(36px, 1.3rem + 3.883vw, 96px);
   line-height: 115px;
 `;
 
