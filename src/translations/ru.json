@@ -28,7 +28,8 @@
     "validation": {
       "requiredField": "Обязательное поле",
       "validEmail": "Введите корректную почту",
-      "samePasswords": "Пароли должны совпадать"
+      "samePasswords": "Пароли должны совпадать",
+      "invalidCredential": "Неверные данные"
     }
   }
 }

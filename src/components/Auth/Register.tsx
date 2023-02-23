@@ -23,7 +23,6 @@ interface SignUpValues {
   confirmPassword: string;
 }
 
-//todo add error translations
 export const Register = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');

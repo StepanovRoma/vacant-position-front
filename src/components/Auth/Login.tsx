@@ -3,6 +3,8 @@ import { Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { LoginValues } from 'ducks/auth/types';
+import { useLoginMutation } from 'ducks/auth/api';
 
 import { ROUTES } from 'constants/routes';
 
@@ -12,19 +14,15 @@ import {
   InputField,
   Link,
   LinkContainer,
+  LoginErrorText,
   PageLayout,
 } from './style';
 import { loginValidationSchema } from './validationSchemas';
 
-interface LoginValues {
-  email: string;
-  password: string;
-}
-
-//todo add translations to errors
 export const Login = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
+  const [loginUser, { isError }] = useLoginMutation();
 
   const {
     control,
@@ -40,8 +38,7 @@ export const Login = () => {
   });
 
   const onSubmit: SubmitHandler<LoginValues> = data => {
-    //todo add login request
-    console.log(data);
+    loginUser(data);
   };
 
   return (
@@ -79,6 +76,10 @@ export const Login = () => {
               />
             )}
           />
+
+          {isError && (
+            <LoginErrorText>{errorsTr('invalidCredential')}</LoginErrorText>
+          )}
 
           <AuthButton variant="contained" type="submit">
             {tr('enter')}
