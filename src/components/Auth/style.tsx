@@ -32,7 +32,7 @@ export const Link = styled(NavLink)`
 
 export const LinkContainer = styled(Box)`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 4px;
 `;
