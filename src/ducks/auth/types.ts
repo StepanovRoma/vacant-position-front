@@ -1,5 +1,7 @@
+import { ServerUserResponse } from 'dtos/user';
+
 export interface AuthState {
-  userId: string | null;
+  user: ServerUserResponse | null;
   isInit: boolean;
 }
 

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValues } from 'ducks/auth/types';
-import { useLoginMutation } from 'ducks/auth/api';
+import { useGetMeQuery, useLoginMutation } from 'ducks/auth/api';
+import { enter } from 'ducks/auth';
+import { useDispatch } from 'react-redux';
 
 import { ROUTES } from 'constants/routes';
 
@@ -22,7 +24,14 @@ import { loginValidationSchema } from './validationSchemas';
 export const Login = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
-  const [loginUser, { isError }] = useLoginMutation();
+  const dispatch = useDispatch();
+  const [loginUser, { data, isError, isSuccess }] = useLoginMutation();
+  useEffect(() => {
+    if (data) {
+      dispatch(enter(data));
+    }
+  }, [dispatch, data]);
+  useGetMeQuery(isSuccess, { skip: !isSuccess });
 
   const {
     control,

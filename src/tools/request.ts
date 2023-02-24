@@ -4,6 +4,8 @@ import { BaseQueryFn } from '@reduxjs/toolkit/query';
 
 import { API_BASE_URL } from 'constants/endpoints';
 
+import { getAuthToken } from './helpers';
+
 export const request = applyCaseMiddleware(
   axios.create({
     baseURL: API_BASE_URL,
@@ -23,6 +25,9 @@ export const axiosBaseQueryFn: BaseQueryFn<{
       method,
       data,
       params,
+      headers: {
+        Authorization: getAuthToken() ? `Bearer ${getAuthToken()}` : undefined,
+      },
     });
 
     return { data: result.data };
