@@ -12,6 +12,27 @@
   "avatarMenuItems": {
     "profile": "Мой профиль",
     "settings": "Настройки",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "login": "Войти"
+  },
+  "auth": {
+    "login": "Логин",
+    "email": "Почта",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "password": "Пароль",
+    "confirmPassword": "Повторите пароль",
+    "enter": "Войти",
+    "register": "Регистрация",
+    "loginHelper": "Уже зарегестрированы?",
+    "registerHelper": "Нет аккаунта?",
+    "signUp": "Зарегистрироваться",
+    "validation": {
+      "requiredField": "Обязательное поле",
+      "validEmail": "Введите корректную почту",
+      "samePasswords": "Пароли должны совпадать",
+      "invalidCredential": "Неверные данные",
+      "alreadyUse": "Почта уже используется"
+    }
   }
 }

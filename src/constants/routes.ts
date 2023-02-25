@@ -3,6 +3,9 @@ export const ROUTES = {
   ME: '/me',
   RESUME: '/resume',
   VACANCY: '/vacancy',
+  PAGE_404: '*',
+  LOGIN: '/login',
+  REGISTER: '/register',
 };
 
 export const MENU = [

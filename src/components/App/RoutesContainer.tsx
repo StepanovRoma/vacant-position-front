@@ -1,6 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { HeaderLayout } from 'components/RouterLayouts';
+import { Login, Register } from 'components/Auth';
+import {
+  DisableAuthLayout,
+  RequireAuthLayout,
+} from 'components/RouterLayouts/AuthLayouts';
+import { MeLayout } from 'components/RouterLayouts/MeLayout';
 
 import { ROUTES } from 'constants/routes';
 
@@ -9,10 +15,25 @@ export const RoutesContainer = () => {
   return (
     <Routes>
       <Route element={<HeaderLayout />}>
-        <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
-        <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
-        <Route path={ROUTES.RESUME} element={<>{'Резюме пользователя'}</>} />
-        <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
+        <Route element={<MeLayout />}>
+          <Route element={<DisableAuthLayout />}>
+            <Route path={ROUTES.LOGIN} element={<Login />} />
+            <Route path={ROUTES.REGISTER} element={<Register />} />
+          </Route>
+
+          <Route element={<RequireAuthLayout />}>
+            <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
+            <Route
+              path={ROUTES.RESUME}
+              element={<>{'Резюме пользователя'}</>}
+            />
+            <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
+          </Route>
+
+          <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
+        </Route>
+
+        <Route path={ROUTES.PAGE_404} element={<>{'404'}</>} />
       </Route>
     </Routes>
   );
