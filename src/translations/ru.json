@@ -21,7 +21,7 @@
     "firstName": "Имя",
     "lastName": "Фамилия",
     "password": "Пароль",
-    "confirmPassword": "Повторить пароль",
+    "confirmPassword": "Повторите пароль",
     "enter": "Войти",
     "register": "Регистрация",
     "loginHelper": "Уже зарегестрированы?",
