@@ -7,6 +7,7 @@ import {
   RequireAuthLayout,
 } from 'components/RouterLayouts/AuthLayouts';
 import { MeLayout } from 'components/RouterLayouts/MeLayout';
+import { NotFound } from 'pages';
 
 import { ROUTES } from 'constants/routes';
 
@@ -33,7 +34,7 @@ export const RoutesContainer = () => {
           <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
         </Route>
 
-        <Route path={ROUTES.PAGE_404} element={<>{'404'}</>} />
+        <Route path={ROUTES.PAGE_404} element={<NotFound />} />
       </Route>
     </Routes>
   );
