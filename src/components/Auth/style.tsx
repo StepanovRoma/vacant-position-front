@@ -48,7 +48,7 @@ export const InputField = styled(TextField)`
   }
 `;
 
-export const LoginErrorText = styled(Typography)`
+export const ErrorText = styled(Typography)`
   font-size: 12px;
   color: ${COLOR_PALETTE.error};
 `;

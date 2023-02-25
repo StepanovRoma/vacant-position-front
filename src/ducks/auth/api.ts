@@ -5,7 +5,7 @@ import { ServerUserResponse } from 'dtos/user';
 
 import { API_ENDPOINTS } from 'constants/endpoints';
 
-import { LoginValues } from './types';
+import { LoginValues, SignUpValues } from './types';
 
 import { logout, setUser } from './index';
 
@@ -22,11 +22,27 @@ export const authApi = createApi({
         },
       }),
     }),
+    register: build.mutation<
+      ServerAuthResponse,
+      Omit<SignUpValues, 'confirmPassword'>
+    >({
+      query: credentials => ({
+        url: API_ENDPOINTS.REGISTER,
+        method: 'post',
+        data: {
+          email: credentials.email,
+          firstName: credentials.firstName,
+          lastName: credentials.lastName,
+          password: credentials.password,
+        },
+      }),
+    }),
     getMe: build.query<ServerUserResponse, boolean>({
       query: () => ({
         url: API_ENDPOINTS.ME,
         method: 'get',
       }),
+      keepUnusedDataFor: 0,
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -41,4 +57,9 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery } = authApi;
+export const {
+  useLoginMutation,
+  useGetMeQuery,
+  useRegisterMutation,
+  useLazyGetMeQuery,
+} = authApi;

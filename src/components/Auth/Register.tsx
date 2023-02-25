@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { SignUpValues } from 'ducks/auth/types';
+import { useDispatch } from 'react-redux';
+import { useLazyGetMeQuery, useRegisterMutation } from 'ducks/auth/api';
+import { enter } from 'ducks/auth';
 
 import { ROUTES } from 'constants/routes';
 
@@ -12,20 +16,36 @@ import {
   InputField,
   Link,
   LinkContainer,
+  ErrorText,
   PageLayout,
 } from './style';
 import { signUpValidationSchema } from './validationSchemas';
 
-interface SignUpValues {
-  email: string;
-  username: string;
-  password: string;
-  confirmPassword: string;
+interface RequestError {
+  data: {
+    code?: string | undefined;
+    status?: number | undefined;
+  };
 }
 
 export const Register = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
+  const dispatch = useDispatch();
+  const [registerUser, { data, isSuccess, error }] = useRegisterMutation();
+  const [getMe] = useLazyGetMeQuery();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(enter(data));
+    }
+  }, [dispatch, data]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      getMe(true);
+    }
+  }, [getMe, isSuccess]);
 
   const {
     control,
@@ -34,7 +54,8 @@ export const Register = () => {
   } = useForm<SignUpValues>({
     defaultValues: {
       email: '',
-      username: '',
+      firstName: '',
+      lastName: '',
       password: '',
       confirmPassword: '',
     },
@@ -43,8 +64,7 @@ export const Register = () => {
   });
 
   const onSubmit: SubmitHandler<SignUpValues> = data => {
-    //todo add signup request
-    console.log(data);
+    registerUser(data);
   };
 
   return (
@@ -68,17 +88,36 @@ export const Register = () => {
             )}
           />
 
+          {(error as RequestError)?.data?.status === 404 && (
+            <ErrorText>{errorsTr('alreadyUse')}</ErrorText>
+          )}
+
           <Controller
-            name="username"
+            name="firstName"
             control={control}
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('username')}
+                label={tr('firstName')}
                 variant="outlined"
                 {...field}
-                error={!!errors.username?.message}
-                helperText={errorsTr(errors.username?.message)}
+                error={!!errors.firstName?.message}
+                helperText={errorsTr(errors.firstName?.message)}
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            render={({ field }) => (
+              <InputField
+                autoComplete="off"
+                label={tr('lastName')}
+                variant="outlined"
+                {...field}
+                error={!!errors.lastName?.message}
+                helperText={errorsTr(errors.lastName?.message)}
               />
             )}
           />

@@ -4,7 +4,7 @@ import { useI18n } from 'hooks/useI18n';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginValues } from 'ducks/auth/types';
-import { useGetMeQuery, useLoginMutation } from 'ducks/auth/api';
+import { useLazyGetMeQuery, useLoginMutation } from 'ducks/auth/api';
 import { enter } from 'ducks/auth';
 import { useDispatch } from 'react-redux';
 
@@ -16,7 +16,7 @@ import {
   InputField,
   Link,
   LinkContainer,
-  LoginErrorText,
+  ErrorText,
   PageLayout,
 } from './style';
 import { loginValidationSchema } from './validationSchemas';
@@ -26,12 +26,19 @@ export const Login = () => {
   const errorsTr = useI18n('auth.validation');
   const dispatch = useDispatch();
   const [loginUser, { data, isError, isSuccess }] = useLoginMutation();
+  const [getMe] = useLazyGetMeQuery();
+
   useEffect(() => {
     if (data) {
       dispatch(enter(data));
     }
   }, [dispatch, data]);
-  useGetMeQuery(isSuccess, { skip: !isSuccess });
+
+  useEffect(() => {
+    if (isSuccess) {
+      getMe(true);
+    }
+  }, [getMe, isSuccess]);
 
   const {
     control,
@@ -86,9 +93,7 @@ export const Login = () => {
             )}
           />
 
-          {isError && (
-            <LoginErrorText>{errorsTr('invalidCredential')}</LoginErrorText>
-          )}
+          {isError && <ErrorText>{errorsTr('invalidCredential')}</ErrorText>}
 
           <AuthButton variant="contained" type="submit">
             {tr('enter')}
