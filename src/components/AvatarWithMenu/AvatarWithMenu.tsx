@@ -12,7 +12,7 @@ import { useI18n } from 'hooks/useI18n';
 import { useLazyGetMeQuery } from 'ducks/auth/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'ducks/auth';
-import { selectIsAuth } from 'ducks/auth/selectors';
+import { selectIsAuth, selectMeId } from 'ducks/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from 'constants/routes';
@@ -26,6 +26,7 @@ export const AvatarWithMenu = () => {
   const dispatch = useDispatch();
   const hasData = useSelector(selectIsAuth);
   const navigate = useNavigate();
+  const userId = useSelector(selectMeId);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,35 +49,45 @@ export const AvatarWithMenu = () => {
       <IconButton onClick={handleClick}>
         <AvatarContainer />
       </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={!!anchorEl}
-        onClose={handleClose}
-        onClick={handleClose}
-      >
-        {hasData ? (
-          <>
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <AccountCircleIcon fontSize="small" />
-              </ListItemIcon>
-              {avatarMenuTr('profile')}
-            </MenuItem>
-            <Divider />
-            <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              {avatarMenuTr('settings')}
-            </MenuItem>
-            <MenuItem onClick={handleLogout}>
-              <ListItemIcon>
-                <Logout fontSize="small" />
-              </ListItemIcon>
-              {avatarMenuTr('logout')}
-            </MenuItem>
-          </>
-        ) : (
+      {hasData ? (
+        <Menu
+          anchorEl={anchorEl}
+          open={!!anchorEl}
+          onClose={handleClose}
+          onClick={handleClose}
+        >
+          <MenuItem
+            onClick={() => {
+              navigate(`${ROUTES.USER}/${userId}`);
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            {avatarMenuTr('profile')}
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            {avatarMenuTr('settings')}
+          </MenuItem>
+          <MenuItem onClick={handleLogout}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            {avatarMenuTr('logout')}
+          </MenuItem>
+        </Menu>
+      ) : (
+        <Menu
+          anchorEl={anchorEl}
+          open={!!anchorEl}
+          onClose={handleClose}
+          onClick={handleClose}
+        >
           <MenuItem onClick={handleLogin}>
             <ListItemIcon>
               <ListItemIcon>
@@ -85,8 +96,8 @@ export const AvatarWithMenu = () => {
               {avatarMenuTr('login')}
             </ListItemIcon>
           </MenuItem>
-        )}
-      </Menu>
+        </Menu>
+      )}
     </>
   );
 };

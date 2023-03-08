@@ -4,4 +4,5 @@ export const COLOR_PALETTE = {
   deepPurple: '#3D003A',
   grey: '#808080FF',
   error: '#D32F2F',
+  black: '#000000',
 };

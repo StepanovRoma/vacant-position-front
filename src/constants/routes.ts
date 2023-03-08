@@ -6,6 +6,8 @@ export const ROUTES = {
   PAGE_404: '*',
   LOGIN: '/login',
   REGISTER: '/register',
+  USER: '/user',
+  SETTINGS: '/settings',
 };
 
 export const MENU = [

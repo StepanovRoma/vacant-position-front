@@ -1,4 +1,4 @@
-export interface ServerUserResponse {
+export interface ServerUserBodyResponse {
   id: string;
   email: string;
   firstName: string;
@@ -6,3 +6,9 @@ export interface ServerUserResponse {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ServerUserResponse {
+  user: ServerUserBodyResponse;
+}
+
+export type TUser = ServerUserBodyResponse;

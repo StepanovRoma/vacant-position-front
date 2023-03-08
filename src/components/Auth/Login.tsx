@@ -7,6 +7,7 @@ import { LoginValues } from 'ducks/auth/types';
 import { useLazyGetMeQuery, useLoginMutation } from 'ducks/auth/api';
 import { enter } from 'ducks/auth';
 import { useDispatch } from 'react-redux';
+import { PageLayout } from 'ui/style';
 
 import { ROUTES } from 'constants/routes';
 
@@ -17,7 +18,6 @@ import {
   Link,
   LinkContainer,
   ErrorText,
-  PageLayout,
 } from './style';
 import { loginValidationSchema } from './validationSchemas';
 
