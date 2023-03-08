@@ -32,7 +32,8 @@ export const Register = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
   const dispatch = useDispatch();
-  const [registerUser, { data, isSuccess, error }] = useRegisterMutation();
+  const [registerUser, { data, isSuccess, error, isLoading }] =
+    useRegisterMutation();
   const [getMe] = useLazyGetMeQuery();
 
   useEffect(() => {
@@ -154,7 +155,7 @@ export const Register = () => {
             )}
           />
 
-          <AuthButton variant="contained" type="submit">
+          <AuthButton variant="contained" type="submit" disabled={isLoading}>
             {tr('signUp')}
           </AuthButton>
           <LinkContainer>

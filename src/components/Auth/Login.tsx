@@ -25,7 +25,8 @@ export const Login = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
   const dispatch = useDispatch();
-  const [loginUser, { data, isError, isSuccess }] = useLoginMutation();
+  const [loginUser, { data, isError, isSuccess, isLoading }] =
+    useLoginMutation();
   const [getMe] = useLazyGetMeQuery();
 
   useEffect(() => {
@@ -95,7 +96,7 @@ export const Login = () => {
 
           {isError && <ErrorText>{errorsTr('invalidCredential')}</ErrorText>}
 
-          <AuthButton variant="contained" type="submit">
+          <AuthButton variant="contained" type="submit" disabled={isLoading}>
             {tr('enter')}
           </AuthButton>
           <LinkContainer>
