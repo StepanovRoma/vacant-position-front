@@ -9,7 +9,7 @@ export const signUpValidationSchema = yup.object().shape({
   email: yup.string().email('validEmail').required('requiredField'),
   firstName: yup.string().required('requiredField'),
   lastName: yup.string().required('requiredField'),
-  password: yup.string().required('requiredField'),
+  password: yup.string().min(8, 'minPasswordLength').required('requiredField'),
   confirmPassword: yup
     .string()
     .required('requiredField')

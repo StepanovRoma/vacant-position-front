@@ -32,7 +32,8 @@
       "validEmail": "Введите корректную почту",
       "samePasswords": "Пароли должны совпадать",
       "invalidCredential": "Неверные данные",
-      "alreadyUse": "Почта уже используется"
+      "alreadyUse": "Почта уже используется",
+      "minPasswordLength": "Минимум 8 символов"
     }
   },
   "userProfile": {
