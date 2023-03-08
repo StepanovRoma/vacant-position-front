@@ -7,7 +7,7 @@ import {
   RequireAuthLayout,
 } from 'components/RouterLayouts/AuthLayouts';
 import { MeLayout } from 'components/RouterLayouts/MeLayout';
-import { NotFound, UserProfilePage } from 'pages';
+import { NotFound, UserEditPage, UserProfilePage } from 'pages';
 
 import { ROUTES } from 'constants/routes';
 
@@ -16,6 +16,7 @@ export const RoutesContainer = () => {
   return (
     <Routes>
       <Route element={<HeaderLayout />}>
+<<<<<<< Updated upstream
         <Route element={<MeLayout />}>
           <Route element={<DisableAuthLayout />}>
             <Route path={ROUTES.LOGIN} element={<Login />} />
@@ -23,12 +24,11 @@ export const RoutesContainer = () => {
           </Route>
 
           <Route element={<RequireAuthLayout />}>
-            <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
             <Route
               path={`${ROUTES.USER}/:userId`}
               element={<UserProfilePage />}
             />
-            <Route path={`${ROUTES.SETTINGS}`} element={<>{'Settings'}</>} />
+            <Route path={`${ROUTES.SETTINGS}`} element={<UserEditPage />} />
             <Route
               path={ROUTES.RESUME}
               element={<>{'Резюме пользователя'}</>}
@@ -40,6 +40,12 @@ export const RoutesContainer = () => {
         </Route>
 
         <Route path={ROUTES.PAGE_404} element={<NotFound />} />
+=======
+        <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
+        <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
+        <Route path={ROUTES.RESUME} element={<>{'Резюме пользователя'}</>} />
+        <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
+>>>>>>> Stashed changes
       </Route>
     </Routes>
   );

@@ -7,14 +7,13 @@ import { LoginValues } from 'ducks/auth/types';
 import { useLazyGetMeQuery, useLoginMutation } from 'ducks/auth/api';
 import { enter } from 'ducks/auth';
 import { useDispatch } from 'react-redux';
-import { PageLayout } from 'ui/style';
+import { InputField, PageLayout } from 'ui/style';
 
 import { ROUTES } from 'constants/routes';
 
 import {
   AuthButton,
   AuthContainer,
-  InputField,
   Link,
   LinkContainer,
   ErrorText,

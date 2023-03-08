@@ -7,14 +7,13 @@ import { SignUpValues } from 'ducks/auth/types';
 import { useDispatch } from 'react-redux';
 import { useLazyGetMeQuery, useRegisterMutation } from 'ducks/auth/api';
 import { enter } from 'ducks/auth';
-import { PageLayout } from 'ui/style';
+import { InputField, PageLayout } from 'ui/style';
 
 import { ROUTES } from 'constants/routes';
 
 import {
   AuthButton,
   AuthContainer,
-  InputField,
   Link,
   LinkContainer,
   ErrorText,

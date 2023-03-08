@@ -32,17 +32,6 @@ export const LinkContainer = styled(Box)`
   gap: 4px;
 `;
 
-export const InputField = styled(TextField)`
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: ${COLOR_PALETTE.primary};
-    }
-  }
-  & .MuiFormLabel-root.Mui-focused {
-    color: ${COLOR_PALETTE.primary};
-  }
-`;
-
 export const ErrorText = styled(Typography)`
   font-size: 12px;
   color: ${COLOR_PALETTE.error};
