@@ -3,11 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
-export const PageLayout = styled(Box)`
-  min-height: calc(100vh - 119px - 120px);
-  margin: 60px 90px;
-`;
-
 export const AuthContainer = styled(Box)`
   display: flex;
   flex-direction: column;

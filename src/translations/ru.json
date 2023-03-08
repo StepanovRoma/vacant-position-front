@@ -34,5 +34,17 @@
       "invalidCredential": "Неверные данные",
       "alreadyUse": "Почта уже используется"
     }
+  },
+  "userProfile": {
+    "edit": "Редактировать профиль",
+    "livingPlace": "Место проживания",
+    "workExperience": "Опыт работы",
+    "email": "Почта",
+    "findingStatus": "Статус поиска",
+    "registerDate": "Дата регистарции",
+    "vk": "Вк",
+    "telegram": "Телеграм",
+    "phoneNumber": "Номер телефона",
+    "whatsApp": "WhatsApp"
   }
 }
