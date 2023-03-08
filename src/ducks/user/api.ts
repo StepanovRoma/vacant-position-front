@@ -4,8 +4,6 @@ import { ServerUserResponse } from 'dtos/user';
 
 import { API_ENDPOINTS } from 'constants/endpoints';
 
-import { transformUser } from './mapper';
-
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: axiosBaseQueryFn,
