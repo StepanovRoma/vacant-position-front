@@ -22,6 +22,9 @@ export const EditLink = styled(Typography)`
   font-size: 13px;
   line-height: 18px;
   color: ${COLOR_PALETTE.darkPrimary};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ContentContainer = styled(Box)`
@@ -50,4 +53,27 @@ export const TagContainer = styled(Box)`
   padding: 5px 10px;
   box-sizing: border-box;
   border: 1px solid ${COLOR_PALETTE.darkPrimary};
+`;
+
+export const ButtonContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  @media (max-width: 800px) {
+    justify-content: center;
+  }
+`;
+
+export const InfoContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+`;
+
+export const InfoBlocksContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
 `;

@@ -6,6 +6,7 @@ import { useGetUserQuery } from 'ducks/user/api';
 import { UserEditProfile } from 'components/User';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
+import { useGetTagsQuery } from 'ducks/tags/api';
 
 import { ROUTES } from 'constants/routes';
 
@@ -17,19 +18,23 @@ export const UserEditPage = () => {
     isSuccess,
     isFetching,
   } = useGetUserQuery(meId ?? '');
+
+  const { data: tags, isSuccess: isTagsSuccess } = useGetTagsQuery();
+  //todo getTags
+
   const navigate = useNavigate();
 
   if (isError) {
     navigate(ROUTES.PAGE_404);
   }
 
-  if (isFetching || !isSuccess) {
+  if (isFetching || !isSuccess || !isTagsSuccess) {
     return <CircularProgress />;
   }
 
   return (
     <PageLayout>
-      <UserEditProfile user={user.user} />
+      <UserEditProfile user={user.user} tags={tags.tags} />
     </PageLayout>
   );
 };
