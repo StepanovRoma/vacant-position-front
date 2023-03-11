@@ -8,7 +8,6 @@
     "mainPage": "Главная страница",
     "myResumes": "Мои резюме",
     "myVacancies": "Мои вакансии"
-<<<<<<< Updated upstream
   },
   "avatarMenuItems": {
     "profile": "Мой профиль",
@@ -48,7 +47,5 @@
     "telegram": "Телеграм",
     "phoneNumber": "Номер телефона",
     "whatsApp": "WhatsApp"
-=======
->>>>>>> Stashed changes
   }
 }

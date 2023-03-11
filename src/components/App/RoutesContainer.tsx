@@ -16,7 +16,6 @@ export const RoutesContainer = () => {
   return (
     <Routes>
       <Route element={<HeaderLayout />}>
-<<<<<<< Updated upstream
         <Route element={<MeLayout />}>
           <Route element={<DisableAuthLayout />}>
             <Route path={ROUTES.LOGIN} element={<Login />} />
@@ -40,12 +39,6 @@ export const RoutesContainer = () => {
         </Route>
 
         <Route path={ROUTES.PAGE_404} element={<NotFound />} />
-=======
-        <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
-        <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
-        <Route path={ROUTES.RESUME} element={<>{'Резюме пользователя'}</>} />
-        <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
->>>>>>> Stashed changes
       </Route>
     </Routes>
   );
