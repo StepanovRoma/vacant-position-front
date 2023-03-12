@@ -5,4 +5,5 @@ export const COLOR_PALETTE = {
   grey: '#808080FF',
   error: '#D32F2F',
   black: '#000000',
+  white: '#FFFFFF',
 };

@@ -47,5 +47,17 @@
     "telegram": "Телеграм",
     "phoneNumber": "Номер телефона",
     "whatsApp": "WhatsApp"
+  },
+  "home": {
+    "searchPlaceHolder": "Введите название организации или теги...",
+    "extendedSearch": "Расширенный поиск",
+    "allCities": "Все города",
+    "difCity": "Другой город",
+    "list": "Список",
+    "table": "Таблица"
+  },
+  "404": {
+    "pageNotFound": "Страница не найдена",
+    "backToHome": "Вернуться домой"
   }
 }
