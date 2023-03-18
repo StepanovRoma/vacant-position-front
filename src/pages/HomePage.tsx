@@ -64,12 +64,12 @@ export const HomePage = () => {
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
           <Tooltip title={tr('table')} arrow>
             <Button sx={{ minWidth: 'fit-content' }}>
-              <FirstTableView $selected />
+              <FirstTableView $selected="true" />
             </Button>
           </Tooltip>
           <Tooltip title={tr('list')} arrow>
             <Button sx={{ minWidth: 'fit-content' }}>
-              <SecondTableView $selected={false} />
+              <SecondTableView $selected="false" />
             </Button>
           </Tooltip>
         </Box>

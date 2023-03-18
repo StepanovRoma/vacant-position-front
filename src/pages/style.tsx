@@ -132,13 +132,15 @@ export const HomePageLayout = styled(Box)`
 `;
 
 interface ISelectButtonProps {
-  $selected: boolean;
+  $selected: string;
 }
 
 export const FirstTableView = styled(ViewCompactIcon)<ISelectButtonProps>`
-  fill: ${props => (props.$selected ? `${COLOR_PALETTE.darkPrimary}` : 'gray')};
+  fill: ${props =>
+    props.$selected === 'true' ? `${COLOR_PALETTE.darkPrimary}` : 'gray'};
 `;
 
 export const SecondTableView = styled(ViewHeadlineIcon)<ISelectButtonProps>`
-  fill: ${props => (props.$selected ? `${COLOR_PALETTE.darkPrimary}` : 'gray')};
+  fill: ${props =>
+    props.$selected === 'false' ? `${COLOR_PALETTE.darkPrimary}` : 'gray'};
 `;

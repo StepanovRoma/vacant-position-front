@@ -27,7 +27,7 @@ export const UserProfilePage = () => {
 
   return (
     <PageLayout>
-      <UserProfile user={user.user} />
+      <UserProfile user={user} />
     </PageLayout>
   );
 };
