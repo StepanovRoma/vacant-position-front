@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQueryFn } from 'tools/request';
 import { ServerAuthResponse } from 'dtos/auth';
-import { ServerUserBodyResponse, ServerUserMeResponse } from 'dtos/user';
+import { ServerUserMeResponse } from 'dtos/user';
 
 import { API_ENDPOINTS } from 'constants/endpoints';
 

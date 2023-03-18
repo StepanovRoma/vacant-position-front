@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { deleteAuthToken, getAuthToken, setAuthToken } from 'tools/helpers';
 import { ServerAuthResponse } from 'dtos/auth';
-import { ServerUserBodyResponse, ServerUserMeResponse } from 'dtos/user';
+import { ServerUserMeResponse } from 'dtos/user';
 
 import { AuthState } from './types';
 
