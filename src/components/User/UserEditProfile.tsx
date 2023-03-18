@@ -17,8 +17,18 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { Tag } from 'dtos/tags';
 import { InputField } from 'ui/style';
-import { useForm } from 'react-hook-form';
+import {
+  Controller,
+  SubmitHandler,
+  useFieldArray,
+  useForm,
+} from 'react-hook-form';
 import { SettingsValues } from 'ducks/user/types';
+import { useUpdateUserMutation } from 'ducks/user/api';
+import { useI18n } from 'hooks/useI18n';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { ROUTES } from 'constants/routes';
 
 import {
   ButtonContainer,
@@ -28,6 +38,7 @@ import {
   StyledAvatar,
   UserProfileContainer,
 } from './style';
+import { settingValidationSchema } from './settingValidationSchema';
 
 interface Props {
   user: TUser;
@@ -36,6 +47,9 @@ interface Props {
 
 export const UserEditProfile = ({ user, tags }: Props) => {
   const navigate = useNavigate();
+  const tr = useI18n('userEdit');
+  const errTr = useI18n('userEdit.validation');
+  const [updateUser] = useUpdateUserMutation();
 
   const {
     control,
@@ -45,88 +59,249 @@ export const UserEditProfile = ({ user, tags }: Props) => {
     defaultValues: {
       firstName: user.firstName,
       lastName: user.lastName,
-      city: null,
-      experience: null,
-      status: false,
+      city: user.city ?? '',
+      experience: user.experience ?? '',
+      status: String(user.status),
       image: null,
-      about: null,
-      tags: null,
-      vkontakte: null,
-      telegram: null,
-      phone: null,
-      whatsapp: null,
+      about: user.about ?? '',
+      tags: user.tags,
+      vkontakte: user.vkontakte ?? '',
+      telegram: user.telegram ?? '',
+      phone: user.phone ?? '',
+      whatsapp: user.whatsapp ?? '',
     },
+    resolver: yupResolver(settingValidationSchema),
     mode: 'onChange',
   });
 
-  console.log(user);
+  const { fields, append, remove } = useFieldArray({
+    name: 'tags',
+    control,
+  });
+
+  const onSubmit: SubmitHandler<SettingsValues> = data => {
+    updateUser(data);
+    navigate(ROUTES.HOME);
+  };
 
   return (
     <UserProfileContainer>
-      <ContentContainer>
-        <Box>
-          <StyledAvatar variant="square" />
-        </Box>
-        <InfoBlocksContainer>
-          <InfoContainer>
-            <Typography>{'Личная информация'}</Typography>
-            <InputField label="Имя" />
-            <InputField label="Фамилия" />
-            <InputField label="Место проживания" />
-            <InputField label="Опыт работы" />
-            <FormControl>
-              <FormLabel>{'Статус поиска'}</FormLabel>
-              <RadioGroup row>
-                <FormControlLabel value control={<Radio />} label="ищу" />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio />}
-                  label="не ищу"
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <ContentContainer>
+          <Box
+            display="flex"
+            flexDirection="column"
+            gap="10px"
+            alignItems="center"
+          >
+            <StyledAvatar variant="square" />
+            <Typography>{tr('changeAvatar')}</Typography>
+          </Box>
+          <InfoBlocksContainer>
+            <InfoContainer>
+              <Typography>{tr('privateInfo')}</Typography>
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('name')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.firstName?.message}
+                    helperText={errTr(errors.firstName?.message)}
+                  />
+                )}
+              />
+
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('lastName')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.lastName?.message}
+                    helperText={errTr(errors.lastName?.message)}
+                  />
+                )}
+              />
+
+              <Controller
+                name="city"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('city')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.city?.message}
+                    helperText={errTr(errors.city?.message)}
+                  />
+                )}
+              />
+
+              <Controller
+                name="experience"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('experience')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.experience?.message}
+                    helperText={errTr(errors.experience?.message)}
+                  />
+                )}
+              />
+
+              <FormControl>
+                <FormLabel>{tr('status')}</FormLabel>
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <RadioGroup {...field} row>
+                      <FormControlLabel
+                        value="true"
+                        control={<Radio />}
+                        label={tr('lookingFor')}
+                      />
+                      <FormControlLabel
+                        value="false"
+                        control={<Radio />}
+                        label={tr('notLookingFor')}
+                      />
+                    </RadioGroup>
+                  )}
                 />
-              </RadioGroup>
-            </FormControl>
-          </InfoContainer>
+              </FormControl>
+            </InfoContainer>
 
-          <InfoContainer>
-            <Typography>{'Контакты'}</Typography>
-            <InputField label="Вк" />
-            <InputField label="Телеграм" />
-            <InputField label="Номер телефона" />
-            <InputField label="WhatsApp" />
-          </InfoContainer>
-          <InfoContainer>
-            <Typography>{'Теги'}</Typography>
-            <Select
-              multiple
-              input={<OutlinedInput />}
-              value={[]}
-              renderValue={tags => (
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                  {tags.map((tag: Tag) => (
-                    <Chip key={tag.id} label={tag.tag} />
-                  ))}
-                </Box>
-              )}
-            >
-              {tags.map(tag => (
-                <MenuItem key={tag.id} value={tag.id}>
-                  {tag.tag}
-                </MenuItem>
-              ))}
-            </Select>
-          </InfoContainer>
+            <InfoContainer>
+              <Typography>{tr('contacts')}</Typography>
+              <Controller
+                name="vkontakte"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('vk')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.vkontakte?.message}
+                    helperText={errTr(errors.vkontakte?.message)}
+                  />
+                )}
+              />
+              <Controller
+                name="telegram"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('telegram')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.telegram?.message}
+                    helperText={errTr(errors.telegram?.message)}
+                  />
+                )}
+              />
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('phone')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.phone?.message}
+                    helperText={errTr(errors.phone?.message)}
+                  />
+                )}
+              />
+              <Controller
+                name="whatsapp"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    autoComplete="off"
+                    label={tr('whatsapp')}
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.whatsapp?.message}
+                    helperText={errTr(errors.whatsapp?.message)}
+                  />
+                )}
+              />
+            </InfoContainer>
+            <InfoContainer>
+              <Typography>{tr('tags')}</Typography>
+              <Select
+                multiple
+                input={<OutlinedInput />}
+                value={fields}
+                renderValue={tags => (
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                    {tags.map((tag: Tag) => (
+                      <Chip key={tag.id} label={tag.tag} />
+                    ))}
+                  </Box>
+                )}
+              >
+                {tags.map(tag => (
+                  <MenuItem
+                    key={tag.id}
+                    value={tag.id}
+                    onClick={() => {
+                      const id = fields.findIndex(item => {
+                        return item.tag === tag.tag;
+                      });
+                      if (id === -1) {
+                        append({ id: tag.id, tag: tag.tag });
+                      } else {
+                        remove(id);
+                      }
+                    }}
+                  >
+                    {tag.tag}
+                  </MenuItem>
+                ))}
+              </Select>
+            </InfoContainer>
 
-          <InfoContainer>
-            <Typography>{'О себе'}</Typography>
-            <InputField multiline />
-          </InfoContainer>
+            <InfoContainer>
+              <Typography>{tr('about')}</Typography>
 
-          <ButtonContainer>
-            <Button onClick={() => navigate(-1)}>{'Отмена'}</Button>
-            <Button onClick={() => navigate(-1)}>{'Сохранить'}</Button>
-          </ButtonContainer>
-        </InfoBlocksContainer>
-      </ContentContainer>
+              <Controller
+                name="about"
+                control={control}
+                render={({ field }) => (
+                  <InputField
+                    multiline
+                    variant="outlined"
+                    {...field}
+                    error={!!errors.about?.message}
+                    helperText={errTr(errors.about?.message)}
+                  />
+                )}
+              />
+            </InfoContainer>
+
+            <ButtonContainer>
+              <Button onClick={() => navigate(-1)}>{tr('cancel')}</Button>
+              <Button type="submit">{tr('save')}</Button>
+            </ButtonContainer>
+          </InfoBlocksContainer>
+        </ContentContainer>
+      </form>
     </UserProfileContainer>
   );
 };

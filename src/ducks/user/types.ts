@@ -5,7 +5,7 @@ export interface SettingsValues {
   lastName: string;
   city: string | null;
   experience: string | null;
-  status: boolean;
+  status: string;
   image: null;
   about: string | null;
   tags: Tag[] | null;

@@ -7,4 +7,5 @@ export const API_ENDPOINTS = {
   USER: '/users',
   TAGS: '/tags',
   QUOTE: '/quote',
+  INFO: '/info',
 };

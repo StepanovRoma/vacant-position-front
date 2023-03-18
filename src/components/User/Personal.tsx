@@ -24,16 +24,16 @@ export const Personal = ({ user }: Props) => {
         </Box>
 
         <Box display="flex" flexDirection="column" gap="20px">
-          <Box>{user.city ? user.city : 'Не указано'}</Box>
-          <Box>{user.experience ? user.experience : 'Не указано'}</Box>
+          <Box>{user.city ? user.city : tr('notSpecified')}</Box>
+          <Box>{user.experience ? user.experience : tr('notSpecified')}</Box>
           <Box>{user.email}</Box>
-          <Box>{user.status ? 'Ищу' : 'Не ищу'}</Box>
+          <Box>{user.status ? tr('lookingFor') : tr('notLookingFor')}</Box>
           <Box>{format(new Date(user.createdAt), 'dd/MM/yyyy')}</Box>
         </Box>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{'Контакты'}</Typography>
+        <Typography variant="h6">{tr('contacts')}</Typography>
         <Box display="flex" flexDirection="row" gap="70px">
           <Box display="flex" flexDirection="column" gap="20px">
             <Box>{tr('vk')}</Box>
@@ -43,32 +43,18 @@ export const Personal = ({ user }: Props) => {
           </Box>
 
           <Box display="flex" flexDirection="column" gap="20px">
-            <Box>{user.vkontakte ? user.vkontakte : 'Не указано'}</Box>
-            <Box>{user.telegram ? user.telegram : 'Не указано'}</Box>
-            <Box>{user.phone ? user.phone : 'Не указано'}</Box>
-            <Box>{user.whatsapp ? user.whatsapp : 'Не указано'}</Box>
+            <Box>{user.vkontakte ? user.vkontakte : tr('notSpecified')}</Box>
+            <Box>{user.telegram ? user.telegram : tr('notSpecified')}</Box>
+            <Box>{user.phone ? user.phone : tr('notSpecified')}</Box>
+            <Box>{user.whatsapp ? user.whatsapp : tr('notSpecified')}</Box>
           </Box>
         </Box>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{'Теги'}</Typography>
+        <Typography variant="h6">{tr('tags')}</Typography>
         <Grid container spacing={2}>
-          {[
-            { id: 1, tag: 'Рома' },
-            { id: 2, tag: 'Саша' },
-            { id: 3, tag: 'c++' },
-            { id: 4, tag: 'Коммуникабельность' },
-            { id: 5, tag: 'Server-Side Rendering' },
-            { id: 6, tag: 'React' },
-            { id: 7, tag: 'tag1' },
-            { id: 8, tag: 'tag1' },
-            { id: 9, tag: 'tag1' },
-            { id: 10, tag: 'tag1' },
-            { id: 11, tag: 'tag1' },
-            { id: 12, tag: 'tag1' },
-            { id: 13, tag: 'tag1' },
-          ].map(tag => (
+          {user.tags?.map(tag => (
             <Grid key={tag.id} item>
               <TagContainer>{tag.tag}</TagContainer>
             </Grid>
@@ -77,12 +63,12 @@ export const Personal = ({ user }: Props) => {
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{'О себе'}</Typography>
-        <Typography>{user.about ? user.about : 'Не указано'}</Typography>
+        <Typography variant="h6">{tr('about')}</Typography>
+        <Typography>{user.about ? user.about : tr('notSpecified')}</Typography>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{'Открытые резюме'}</Typography>
+        <Typography variant="h6">{tr('openСV')}</Typography>
       </Box>
     </Box>
   );

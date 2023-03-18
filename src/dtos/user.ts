@@ -1,3 +1,5 @@
+import { Tag } from './tags';
+
 export interface ServerUserBodyResponse {
   id: string;
   email: string;
@@ -24,7 +26,7 @@ export interface ServerExtendedUser {
   lastName: string;
   phone: null | string;
   status: boolean;
-  tags: null | string;
+  tags: Tag[];
   telegram: null | string;
   updatedAt: string;
   vkontakte: null | string;

@@ -68,8 +68,7 @@ export const ButtonContainer = styled(Box)`
 export const InfoContainer = styled(Box)`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 300px;
+  gap: 20px;
 `;
 
 export const InfoBlocksContainer = styled(Box)`
