@@ -24,10 +24,10 @@ export const Personal = ({ user }: Props) => {
         </Box>
 
         <Box display="flex" flexDirection="column" gap="20px">
-          <Box>{'Новосибирск'}</Box>
-          <Box>{'5 лет завода + водки'}</Box>
+          <Box>{user.city ? user.city : 'Не указано'}</Box>
+          <Box>{user.experience ? user.experience : 'Не указано'}</Box>
           <Box>{user.email}</Box>
-          <Box>{'Ищу'}</Box>
+          <Box>{user.status ? 'Ищу' : 'Не ищу'}</Box>
           <Box>{format(new Date(user.createdAt), 'dd/MM/yyyy')}</Box>
         </Box>
       </Box>
@@ -43,10 +43,10 @@ export const Personal = ({ user }: Props) => {
           </Box>
 
           <Box display="flex" flexDirection="column" gap="20px">
-            <Box>{'https://vk.com/belsanku'}</Box>
-            <Box>{'https://t.me/belsanku'}</Box>
-            <Box>{'+79516069395'}</Box>
-            <Box>{'+79516069395'}</Box>
+            <Box>{user.vkontakte ? user.vkontakte : 'Не указано'}</Box>
+            <Box>{user.telegram ? user.telegram : 'Не указано'}</Box>
+            <Box>{user.phone ? user.phone : 'Не указано'}</Box>
+            <Box>{user.whatsapp ? user.whatsapp : 'Не указано'}</Box>
           </Box>
         </Box>
       </Box>
@@ -78,7 +78,7 @@ export const Personal = ({ user }: Props) => {
 
       <Box display="flex" flexDirection="column" gap="20px">
         <Typography variant="h6">{'О себе'}</Typography>
-        <Typography>{'О себе много инфы'}</Typography>
+        <Typography>{user.about ? user.about : 'Не указано'}</Typography>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">

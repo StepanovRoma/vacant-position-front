@@ -8,6 +8,7 @@ import {
 } from 'components/RouterLayouts/AuthLayouts';
 import { MeLayout } from 'components/RouterLayouts/MeLayout';
 import { NotFound, UserEditPage, UserProfilePage } from 'pages';
+import { HomePage } from 'pages/HomePage';
 
 import { ROUTES } from 'constants/routes';
 
@@ -35,7 +36,7 @@ export const RoutesContainer = () => {
             <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
           </Route>
 
-          <Route path={ROUTES.HOME} element={<>{'Главная'}</>} />
+          <Route path={ROUTES.HOME} element={<HomePage />} />
         </Route>
 
         <Route path={ROUTES.PAGE_404} element={<NotFound />} />

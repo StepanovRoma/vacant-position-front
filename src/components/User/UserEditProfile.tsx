@@ -59,6 +59,8 @@ export const UserEditProfile = ({ user, tags }: Props) => {
     mode: 'onChange',
   });
 
+  console.log(user);
+
   return (
     <UserProfileContainer>
       <ContentContainer>

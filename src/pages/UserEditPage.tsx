@@ -34,7 +34,7 @@ export const UserEditPage = () => {
 
   return (
     <PageLayout>
-      <UserEditProfile user={user.user} tags={tags.tags} />
+      <UserEditProfile user={user} tags={tags.tags} />
     </PageLayout>
   );
 };

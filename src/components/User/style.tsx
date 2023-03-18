@@ -40,6 +40,7 @@ export const ContentContainer = styled(Box)`
 `;
 
 export const UserProfileContainer = styled(Box)`
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   gap: 10px;

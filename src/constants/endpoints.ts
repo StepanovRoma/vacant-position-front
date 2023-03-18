@@ -6,4 +6,5 @@ export const API_ENDPOINTS = {
   REGISTER: '/register',
   USER: '/users',
   TAGS: '/tags',
+  QUOTE: '/quote',
 };
