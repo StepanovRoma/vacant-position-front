@@ -131,14 +131,6 @@ export const HomePageLayout = styled(Box)`
   min-height: calc(100vh - 119px - 250px - 120px);
 `;
 
-interface ISelectButtonProps {
-  $selected: boolean;
-}
+export const FirstTableView = styled(ViewCompactIcon)``;
 
-export const FirstTableView = styled(ViewCompactIcon)<ISelectButtonProps>`
-  fill: ${props => (props.$selected ? `${COLOR_PALETTE.darkPrimary}` : 'gray')};
-`;
-
-export const SecondTableView = styled(ViewHeadlineIcon)<ISelectButtonProps>`
-  fill: ${props => (props.$selected ? `${COLOR_PALETTE.darkPrimary}` : 'gray')};
-`;
+export const SecondTableView = styled(ViewHeadlineIcon)``;

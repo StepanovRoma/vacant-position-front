@@ -6,7 +6,7 @@ import { API_ENDPOINTS } from 'constants/endpoints';
 import { ServerQuote } from './types';
 
 export const quoteApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: 'quoteApi',
   baseQuery: axiosBaseQueryFn,
   endpoints: build => ({
     getRandomQuote: build.query<ServerQuote, void>({
