@@ -7,6 +7,10 @@ export interface ServerUserBodyResponse {
   updatedAt: string;
 }
 
+export interface ServerUserMeResponse {
+  user: ServerUserBodyResponse;
+}
+
 export interface ServerExtendedUser {
   about: null | string;
   city: null | string;

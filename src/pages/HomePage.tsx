@@ -6,6 +6,8 @@ import { useGetRandomQuoteQuery } from 'ducks/quote/api';
 
 import { placeHolders } from 'constants/placeHolders';
 
+import { COLOR_PALETTE } from '../constants/theme';
+
 import {
   FirstTableView,
   HomePageContainer,
@@ -63,13 +65,18 @@ export const HomePage = () => {
       <HomePageLayout display="flex" flexDirection="column">
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
           <Tooltip title={tr('table')} arrow>
-            <Button sx={{ minWidth: 'fit-content' }}>
-              <FirstTableView $selected="true" />
+            <Button sx={{ minWidth: 'fit-content', color: `grey` }}>
+              <FirstTableView />
             </Button>
           </Tooltip>
           <Tooltip title={tr('list')} arrow>
-            <Button sx={{ minWidth: 'fit-content' }}>
-              <SecondTableView $selected="false" />
+            <Button
+              sx={{
+                minWidth: 'fit-content',
+                color: `${COLOR_PALETTE.darkPrimary}`,
+              }}
+            >
+              <SecondTableView />
             </Button>
           </Tooltip>
         </Box>

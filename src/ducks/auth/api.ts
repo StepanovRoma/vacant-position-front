@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQueryFn } from 'tools/request';
 import { ServerAuthResponse } from 'dtos/auth';
-import { ServerUserResponse } from 'dtos/user';
+import { ServerUserBodyResponse, ServerUserMeResponse } from 'dtos/user';
 
 import { API_ENDPOINTS } from 'constants/endpoints';
 
@@ -37,7 +37,7 @@ export const authApi = createApi({
         },
       }),
     }),
-    getMe: build.query<ServerUserResponse, boolean>({
+    getMe: build.query<ServerUserMeResponse, boolean>({
       query: () => ({
         url: API_ENDPOINTS.ME,
         method: 'get',
