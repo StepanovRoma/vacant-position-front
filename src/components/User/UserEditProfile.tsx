@@ -6,6 +6,7 @@ import {
   Chip,
   FormControl,
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   MenuItem,
   OutlinedInput,
@@ -253,37 +254,40 @@ export const UserEditProfile = ({ user, tags }: Props) => {
             </InfoContainer>
             <InfoContainer>
               <Typography>{tr('tags')}</Typography>
-              <Select
-                multiple
-                input={<OutlinedInput />}
-                value={fields}
-                renderValue={tags => (
-                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                    {tags.map((tag: Tag) => (
-                      <Chip key={tag.id} label={tag.tag} />
-                    ))}
-                  </Box>
-                )}
-              >
-                {tags.map(tag => (
-                  <MenuItem
-                    key={tag.id}
-                    value={tag.id}
-                    onClick={() => {
-                      const id = fields.findIndex(item => {
-                        return item.tag === tag.tag;
-                      });
-                      if (id === -1) {
-                        append({ id: tag.id, tag: tag.tag });
-                      } else {
-                        remove(id);
-                      }
-                    }}
-                  >
-                    {tag.tag}
-                  </MenuItem>
-                ))}
-              </Select>
+              <FormControl error={!!errors.tags?.message}>
+                <Select
+                  multiple
+                  input={<OutlinedInput />}
+                  value={fields}
+                  renderValue={tags => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {tags.map((tag: Tag) => (
+                        <Chip key={tag.id} label={tag.tag} />
+                      ))}
+                    </Box>
+                  )}
+                >
+                  {tags.map(tag => (
+                    <MenuItem
+                      key={tag.id}
+                      value={tag.id}
+                      onClick={() => {
+                        const id = fields.findIndex(item => {
+                          return item.tag === tag.tag;
+                        });
+                        if (id === -1) {
+                          append({ id: tag.id, tag: tag.tag });
+                        } else {
+                          remove(id);
+                        }
+                      }}
+                    >
+                      {tag.tag}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>{errTr(errors.tags?.message)}</FormHelperText>
+              </FormControl>
             </InfoContainer>
 
             <InfoContainer>

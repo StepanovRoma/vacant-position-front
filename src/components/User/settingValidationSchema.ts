@@ -18,4 +18,5 @@ export const settingValidationSchema = yup.object().shape({
   telegram: yup.string().max(32, 'maxTelegramLength'),
   phone: yup.string().max(16, 'maxPhoneNumberLength'),
   whatsapp: yup.string().max(16, 'maxPhoneNumberLength'),
+  tags: yup.array().max(10, 'maxTagsLength'),
 });

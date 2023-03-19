@@ -82,7 +82,8 @@
       "maxAboutLength": "Максимум 384 символа",
       "maxVKLength": "Максимум 255 символов",
       "maxTelegramLength": "Максимум 32 символа",
-      "maxPhoneNumberLength": "Максимум 16 символа"
+      "maxPhoneNumberLength": "Максимум 16 символа",
+      "maxTagsLength": "Максимум 10 тегов"
     }
   },
   "home": {
