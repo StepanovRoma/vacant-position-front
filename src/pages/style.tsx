@@ -141,3 +141,12 @@ export const SecondTableView = styled(ViewHeadlineIcon)``;
 export const UserName = styled(Typography)`
   font-size: clamp(16px, 0.4rem + 3.883vw, 60px);
 `;
+
+interface ISwitchViewButton {
+  $view: boolean;
+}
+
+export const SwitchViewButton = styled(Button)<ISwitchViewButton>`
+  min-width: fit-content;
+  color: ${props => (props.$view ? 'grey' : `${COLOR_PALETTE.darkPrimary}`)};
+`;

@@ -1,4 +1,12 @@
-import { Box, Button, Card, Grid, styled } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  Grid,
+  styled,
+} from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -52,4 +60,52 @@ export const DateContainer = styled(Box)`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+`;
+
+export const CardContentContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 15px;
+  justify-content: space-between;
+`;
+
+export const InfoContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
+`;
+
+export const AvatarContainer = styled(Avatar)`
+  width: 80px;
+  height: 80px;
+`;
+
+export const ResumeInfoContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+
+export const ActionsContainer = styled(CardActions)`
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const FavoriteButton = styled(Button)`
+  box-sizing: border-box;
+  min-width: fit-content;
+  color: ${COLOR_PALETTE.purple};
+`;
+
+export const ResumeListCard = styled(Card)`
+  width: calc(100vw - 180px);
+  height: 310px;
+  background-color: ${COLOR_PALETTE.cardPrimary};
+  @media (max-width: 790px) {
+    width: calc(100vw - 75px);
+  }
 `;

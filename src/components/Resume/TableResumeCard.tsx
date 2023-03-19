@@ -1,17 +1,21 @@
 import React from 'react';
 import { IResume } from 'dtos/resume';
-import {
-  Avatar,
-  Box,
-  Button,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { CardContent, Grid, Typography } from '@mui/material';
 import { Star } from '@mui/icons-material';
 
-import { CustomGrid, MoreButton, ResumeCard, TagContainer } from './style';
+import {
+  ActionsContainer,
+  AvatarContainer,
+  CardContentContainer,
+  CustomGrid,
+  DateContainer,
+  FavoriteButton,
+  InfoContainer,
+  MoreButton,
+  ResumeCard,
+  ResumeInfoContainer,
+  TagContainer,
+} from './style';
 
 interface Props {
   resume?: IResume;
@@ -21,35 +25,19 @@ export const TableResumeCard = ({ resume }: Props) => {
   return (
     <ResumeCard>
       <CardContent>
-        <Box
-          display="flex"
-          flexDirection="column"
-          height="100%"
-          gap="15px"
-          justifyContent="space-between"
-        >
-          <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
+        <CardContentContainer>
+          <DateContainer>
             <Typography>{resume?.createdAt}</Typography>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="row"
-            gap="15px"
-            marginBottom="10px"
-          >
-            <Avatar variant="square" sx={{ width: '80px', height: '80px' }} />
-            <Box display="flex" flexDirection="column" gap="2px">
+          </DateContainer>
+          <InfoContainer>
+            <AvatarContainer variant="square" />
+            <ResumeInfoContainer>
               <Typography>{'Виктор'}</Typography>
               <Typography>{resume?.position}</Typography>
               <Typography>{resume?.experience}</Typography>
               <Typography>{resume?.payroll}</Typography>
-            </Box>
-          </Box>
+            </ResumeInfoContainer>
+          </InfoContainer>
           <CustomGrid spacing={1} container>
             {resume?.tags?.map(tag => (
               <Grid key={tag.id} item>
@@ -57,27 +45,14 @@ export const TableResumeCard = ({ resume }: Props) => {
               </Grid>
             ))}
           </CustomGrid>
-        </Box>
+        </CardContentContainer>
       </CardContent>
-      <CardActions
-        sx={{
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          display: 'flex',
-          flexDirection: 'row',
-        }}
-      >
+      <ActionsContainer>
         <MoreButton variant="contained">{'Посмотреть резюме'}</MoreButton>
-        <Button
-          sx={{
-            boxSizing: 'border-box',
-            minWidth: 'fit-content',
-            color: '#CBA3FF',
-          }}
-        >
+        <FavoriteButton>
           <Star />
-        </Button>
-      </CardActions>
+        </FavoriteButton>
+      </ActionsContainer>
     </ResumeCard>
   );
 };
