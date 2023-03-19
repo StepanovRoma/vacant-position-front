@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box, Button, CircularProgress, Tooltip } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
 
 import { placeHolders } from 'constants/placeHolders';
 import { COLOR_PALETTE } from 'constants/theme';
+
+import { TableResumeCard } from '../components/Resume';
 
 import {
   FirstTableView,
@@ -86,7 +88,15 @@ export const HomePage = () => {
             </Button>
           </Tooltip>
         </Box>
-        <Box>{'Resumes'}</Box>
+        <Box>
+          <Grid container spacing={6}>
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+              <Grid item key={item}>
+                <TableResumeCard />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </HomePageLayout>
     </>
   );

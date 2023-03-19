@@ -129,6 +129,9 @@ export const SearchCityContainer = styled(Box)`
 export const HomePageLayout = styled(Box)`
   margin: 60px 90px;
   min-height: calc(100vh - 119px - 250px - 120px);
+  @media (max-width: 790px) {
+    margin: 60px 37.5px;
+  }
 `;
 
 export const FirstTableView = styled(ViewCompactIcon)``;
