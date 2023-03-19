@@ -1,4 +1,4 @@
-import { Box, Button, styled, TextField, Typography } from '@mui/material';
+import { Box, Button, styled, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import { COLOR_PALETTE } from 'constants/theme';
