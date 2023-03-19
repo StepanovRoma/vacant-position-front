@@ -76,7 +76,7 @@
     "save": "Сохранить",
     "validation": {
       "requiredField": "Обязательное поле",
-      "maxNameLength": "Максимум 8 символов",
+      "maxNameLength": "Максимум 32 символов",
       "maxCityLength": "Максимум 64 символа",
       "maxExpLength": "Максимум 8 символов",
       "maxAboutLength": "Максимум 384 символа",
