@@ -11,6 +11,7 @@ import { useGetTagsQuery } from 'ducks/tags/api';
 import { ROUTES } from 'constants/routes';
 
 export const UserEditPage = () => {
+  const navigate = useNavigate();
   const meId = useSelector(selectMeId);
   const {
     data: user,
@@ -20,9 +21,6 @@ export const UserEditPage = () => {
   } = useGetUserQuery(meId ?? '');
 
   const { data: tags, isSuccess: isTagsSuccess } = useGetTagsQuery();
-  //todo getTags
-
-  const navigate = useNavigate();
 
   if (isError) {
     navigate(ROUTES.PAGE_404);

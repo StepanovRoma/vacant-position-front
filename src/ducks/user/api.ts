@@ -13,7 +13,7 @@ export const userApi = createApi({
   endpoints: build => ({
     getUser: build.query<ServerExtendedUser, string>({
       query: userId => ({
-        url: API_ENDPOINTS.USER + `/${userId}`,
+        url: API_ENDPOINTS.USERS + `/${userId}`,
         method: 'get',
       }),
       providesTags: ['User'],
@@ -22,13 +22,31 @@ export const userApi = createApi({
       query: user => ({
         url: API_ENDPOINTS.INFO,
         method: 'patch',
-        //todo rework when right data will be in request
         data: {
           ...user,
           status: user.status === 'true',
-          tags: null,
-          email: 'a@a.da',
-          password: 'aezakmi787',
+          tags:
+            user.tags?.length === 0
+              ? null
+              : user.tags
+                  ?.reduce((acc, item) => {
+                    return acc + item.id + ' ';
+                  }, '')
+                  .trim(),
+        },
+      }),
+      invalidatesTags: ['User'],
+    }),
+    updateUserCredentials: build.mutation<
+      void,
+      { firstName: string; lastName: string; id: string }
+    >({
+      query: user => ({
+        url: API_ENDPOINTS.USER + `/${user.id}`,
+        method: 'patch',
+        data: {
+          firstName: user.firstName,
+          lastName: user.lastName,
         },
       }),
       invalidatesTags: ['User'],
@@ -36,4 +54,8 @@ export const userApi = createApi({
   }),
 });
 
-export const { useGetUserQuery, useUpdateUserMutation } = userApi;
+export const {
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useUpdateUserCredentialsMutation,
+} = userApi;

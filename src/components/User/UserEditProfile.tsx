@@ -24,7 +24,10 @@ import {
   useForm,
 } from 'react-hook-form';
 import { SettingsValues } from 'ducks/user/types';
-import { useUpdateUserMutation } from 'ducks/user/api';
+import {
+  useUpdateUserCredentialsMutation,
+  useUpdateUserMutation,
+} from 'ducks/user/api';
 import { useI18n } from 'hooks/useI18n';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -50,6 +53,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
   const tr = useI18n('userEdit');
   const errTr = useI18n('userEdit.validation');
   const [updateUser] = useUpdateUserMutation();
+  const [updateUserCredentials] = useUpdateUserCredentialsMutation();
 
   const {
     control,
@@ -81,6 +85,11 @@ export const UserEditProfile = ({ user, tags }: Props) => {
 
   const onSubmit: SubmitHandler<SettingsValues> = data => {
     updateUser(data);
+    updateUserCredentials({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      id: user.id,
+    });
     navigate(ROUTES.HOME);
   };
 
