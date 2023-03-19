@@ -68,7 +68,12 @@ export const AvatarWithMenu = () => {
             {avatarMenuTr('profile')}
           </MenuItem>
           <Divider />
-          <MenuItem onClick={handleClose}>
+          <MenuItem
+            onClick={() => {
+              navigate(`${ROUTES.SETTINGS}`);
+              handleClose();
+            }}
+          >
             <ListItemIcon>
               <Settings fontSize="small" />
             </ListItemIcon>

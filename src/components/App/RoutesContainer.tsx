@@ -7,7 +7,7 @@ import {
   RequireAuthLayout,
 } from 'components/RouterLayouts/AuthLayouts';
 import { MeLayout } from 'components/RouterLayouts/MeLayout';
-import { NotFound, UserProfilePage } from 'pages';
+import { NotFound, UserEditPage, UserProfilePage } from 'pages';
 import { HomePage } from 'pages/HomePage';
 
 import { ROUTES } from 'constants/routes';
@@ -24,12 +24,11 @@ export const RoutesContainer = () => {
           </Route>
 
           <Route element={<RequireAuthLayout />}>
-            <Route path={ROUTES.ME} element={<>{'Профиль'}</>} />
             <Route
               path={`${ROUTES.USER}/:userId`}
               element={<UserProfilePage />}
             />
-            <Route path={`${ROUTES.SETTINGS}`} element={<>{'Settings'}</>} />
+            <Route path={`${ROUTES.SETTINGS}`} element={<UserEditPage />} />
             <Route
               path={ROUTES.RESUME}
               element={<>{'Резюме пользователя'}</>}

@@ -10,6 +10,8 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from 'hooks/useI18n';
+import { useSelector } from 'react-redux';
+import { selectMeId } from 'ducks/auth/selectors';
 
 import { MENU } from 'constants/routes';
 
@@ -19,6 +21,7 @@ export const Menu = () => {
   const versionTr = useI18n('general');
   const menuTr = useI18n('menuItems');
   const navigate = useNavigate();
+  const userId = useSelector(selectMeId);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 
   const toggleDrawer =
@@ -54,7 +57,14 @@ export const Menu = () => {
           <List>
             {MENU.map(menuItem => (
               <ListItem key={menuItem.pageName} disablePadding>
-                <ListItemButton onClick={() => navigate(menuItem.route)}>
+                <ListItemButton
+                  onClick={() => {
+                    if (menuItem.pageName === 'profile') {
+                      return navigate(menuItem.route + `/${userId}`);
+                    }
+                    return navigate(menuItem.route);
+                  }}
+                >
                   <ListItemText primary={menuTr(menuItem.pageName)} />
                 </ListItemButton>
               </ListItem>

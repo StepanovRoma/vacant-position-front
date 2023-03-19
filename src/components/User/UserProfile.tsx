@@ -1,10 +1,11 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { TUser } from 'dtos/user';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectMeId } from 'ducks/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from 'hooks/useI18n';
+import { UserName } from 'pages/style';
 
 import { ROUTES } from 'constants/routes';
 
@@ -27,7 +28,7 @@ export const UserProfile = ({ user }: Props) => {
   const tr = useI18n('userProfile');
   return (
     <UserProfileContainer>
-      <Typography variant="h2">{`${user.firstName} ${user.lastName}`}</Typography>
+      <UserName variant="h2">{`${user.firstName} ${user.lastName}`}</UserName>
       <ContentContainer>
         <AvatarContainer>
           <StyledAvatar variant="square" />

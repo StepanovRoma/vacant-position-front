@@ -1,12 +1,11 @@
 import React from 'react';
-import { Box, Button, Tooltip } from '@mui/material';
+import { Box, Button, CircularProgress, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
 
 import { placeHolders } from 'constants/placeHolders';
-
-import { COLOR_PALETTE } from '../constants/theme';
+import { COLOR_PALETTE } from 'constants/theme';
 
 import {
   FirstTableView,
@@ -24,7 +23,8 @@ import {
 
 export const HomePage = () => {
   const tr = useI18n('home');
-  const { data: quote } = useGetRandomQuoteQuery();
+  const { data: quote, isLoading } = useGetRandomQuoteQuery();
+
   return (
     <>
       <HomePageContainer>
@@ -34,7 +34,13 @@ export const HomePage = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          <StyledQuote>{quote ? quote.quote : placeHolders.quote}</StyledQuote>
+          {isLoading ? (
+            <CircularProgress />
+          ) : (
+            <StyledQuote>
+              {quote ? quote.quote : placeHolders.quote}
+            </StyledQuote>
+          )}
         </Box>
         <Box display="flex" flexDirection="column" gap="10px">
           <Search>

@@ -4,6 +4,9 @@ export const API_ENDPOINTS = {
   LOGIN: '/login',
   ME: '/me',
   REGISTER: '/register',
-  USER: '/users',
+  USERS: '/users',
+  USER: '/user',
+  TAGS: '/tags',
   QUOTE: '/quote',
+  INFO: '/info',
 };

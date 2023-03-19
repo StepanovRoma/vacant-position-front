@@ -1,4 +1,4 @@
-import { Box, Button, styled, TextField, Typography } from '@mui/material';
+import { Box, Button, styled, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 import { COLOR_PALETTE } from 'constants/theme';
@@ -30,17 +30,6 @@ export const LinkContainer = styled(Box)`
   flex-direction: column;
   align-items: center;
   gap: 4px;
-`;
-
-export const InputField = styled(TextField)`
-  & .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: ${COLOR_PALETTE.primary};
-    }
-  }
-  & .MuiFormLabel-root.Mui-focused {
-    color: ${COLOR_PALETTE.primary};
-  }
 `;
 
 export const ErrorText = styled(Typography)`

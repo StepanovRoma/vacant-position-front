@@ -134,3 +134,7 @@ export const HomePageLayout = styled(Box)`
 export const FirstTableView = styled(ViewCompactIcon)``;
 
 export const SecondTableView = styled(ViewHeadlineIcon)``;
+
+export const UserName = styled(Typography)`
+  font-size: clamp(16px, 0.4rem + 3.883vw, 60px);
+`;
