@@ -9,6 +9,9 @@ import {
 import { MeLayout } from 'components/RouterLayouts/MeLayout';
 import { NotFound, UserEditPage, UserProfilePage } from 'pages';
 import { HomePage } from 'pages/HomePage';
+import { UserResumes } from 'pages/UserResumes';
+import { CreateResumePage } from 'pages/CreateResumePage';
+import { EditResumeContainer } from 'components/Resume/EditResumeContainer';
 
 import { ROUTES } from 'constants/routes';
 
@@ -29,9 +32,11 @@ export const RoutesContainer = () => {
               element={<UserProfilePage />}
             />
             <Route path={`${ROUTES.SETTINGS}`} element={<UserEditPage />} />
+            <Route path={ROUTES.RESUME} element={<UserResumes />} />
+            <Route path={ROUTES.CREATE_RESUME} element={<CreateResumePage />} />
             <Route
-              path={ROUTES.RESUME}
-              element={<>{'Резюме пользователя'}</>}
+              path={`${ROUTES.EDIT_RESUME}/:resumeId`}
+              element={<EditResumeContainer />}
             />
             <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
           </Route>
