@@ -73,24 +73,13 @@ export const HomePage = () => {
       </HomePageContainer>
       <HomePageLayout display="flex" flexDirection="column">
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
-          <Tooltip title={tr('table')} arrow>
+          <Tooltip title={isTableView ? tr('table') : tr('list')} arrow>
             <SwitchViewButton
-              $view={!isTableView}
               onClick={() => {
-                setIsTableView(true);
+                setIsTableView(prevState => !prevState);
               }}
             >
-              <FirstTableView />
-            </SwitchViewButton>
-          </Tooltip>
-          <Tooltip title={tr('list')} arrow>
-            <SwitchViewButton
-              $view={isTableView}
-              onClick={() => {
-                setIsTableView(false);
-              }}
-            >
-              <SecondTableView />
+              {isTableView ? <FirstTableView /> : <SecondTableView />}
             </SwitchViewButton>
           </Tooltip>
         </Box>

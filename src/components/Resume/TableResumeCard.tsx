@@ -2,6 +2,7 @@ import React from 'react';
 import { IResume } from 'dtos/resume';
 import { CardContent, Grid, Typography } from '@mui/material';
 import { Star } from '@mui/icons-material';
+import { useI18n } from 'hooks/useI18n';
 
 import {
   ActionsContainer,
@@ -22,6 +23,8 @@ interface Props {
 }
 
 export const TableResumeCard = ({ resume }: Props) => {
+  //todo remove unnecessary resume
+  const tr = useI18n('resume');
   return (
     <ResumeCard>
       <CardContent>
@@ -32,7 +35,7 @@ export const TableResumeCard = ({ resume }: Props) => {
           <InfoContainer>
             <AvatarContainer variant="square" />
             <ResumeInfoContainer>
-              <Typography>{'Виктор'}</Typography>
+              <Typography>{`${resume?.firstName} ${resume?.lastName}`}</Typography>
               <Typography>{resume?.position}</Typography>
               <Typography>{resume?.experience}</Typography>
               <Typography>{resume?.payroll}</Typography>
@@ -48,7 +51,7 @@ export const TableResumeCard = ({ resume }: Props) => {
         </CardContentContainer>
       </CardContent>
       <ActionsContainer>
-        <MoreButton variant="contained">{'Посмотреть резюме'}</MoreButton>
+        <MoreButton variant="contained">{tr('showResume')}</MoreButton>
         <FavoriteButton>
           <Star />
         </FavoriteButton>
