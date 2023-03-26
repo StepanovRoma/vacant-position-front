@@ -14,3 +14,8 @@ export interface IResume {
   preferContact: string | null;
   isVisible: boolean;
 }
+
+export interface ServerResumesResponse {
+  count: number;
+  resume: IResume[];
+}
