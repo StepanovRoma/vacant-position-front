@@ -5,7 +5,9 @@ import {
   Card,
   CardActions,
   Grid,
+  IconButton,
   styled,
+  Typography,
 } from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
@@ -30,7 +32,7 @@ export const MoreButton = styled(Button)`
 `;
 
 export const CustomGrid = styled(Grid)`
-  max-height: 88px;
+  max-height: 60px;
   overflow: auto;
   ::-webkit-scrollbar {
     width: 6px;
@@ -58,7 +60,7 @@ export const ResumeCard = styled(Card)`
 export const DateContainer = styled(Box)`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -75,6 +77,7 @@ export const InfoContainer = styled(Box)`
   flex-direction: row;
   gap: 15px;
   margin-bottom: 10px;
+  min-height: 100px;
 `;
 
 export const AvatarContainer = styled(Avatar)`
@@ -95,7 +98,7 @@ export const ActionsContainer = styled(CardActions)`
   flex-direction: row;
 `;
 
-export const FavoriteButton = styled(Button)`
+export const FavoriteButton = styled(IconButton)`
   box-sizing: border-box;
   min-width: fit-content;
   color: ${COLOR_PALETTE.purple};
@@ -108,4 +111,24 @@ export const ResumeListCard = styled(Card)`
   @media (max-width: 790px) {
     width: calc(100vw - 75px);
   }
+`;
+
+export const ModalContent = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background-color: ${COLOR_PALETTE.white};
+  padding: 15px;
+  min-height: 100px;
+`;
+
+export const ModalText = styled(Typography)`
+  margin: 0 0 20px 0;
+`;
+
+export const ModalTitle = styled(Typography)`
+  font-size: 24px;
+  margin-bottom: 20px;
 `;

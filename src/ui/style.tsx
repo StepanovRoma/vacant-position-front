@@ -1,4 +1,4 @@
-import { Box, styled, TextField } from '@mui/material';
+import { Box, styled, TextField, Typography } from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -20,4 +20,9 @@ export const InputField = styled(TextField)`
   & .MuiFormLabel-root.Mui-focused {
     color: ${COLOR_PALETTE.primary};
   }
+`;
+
+export const PageTitle = styled(Typography)`
+  width: 100%;
+  font-size: 32px;
 `;

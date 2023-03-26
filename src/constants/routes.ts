@@ -7,6 +7,8 @@ export const ROUTES = {
   REGISTER: '/register',
   USER: '/user',
   SETTINGS: '/settings',
+  CREATE_RESUME: '/resume/create',
+  EDIT_RESUME: '/resume/edit',
 };
 
 export const MENU = [

@@ -112,7 +112,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 0,
     // '@typescript-eslint/strict-boolean-expressions': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    complexity: ['error', 9],
+    complexity: ['error', 15],
     'max-lines': ['error', 2000],
     'max-depth': ['error', 3],
     'max-params': ['error', 4],

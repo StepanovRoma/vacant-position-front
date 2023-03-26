@@ -84,14 +84,14 @@ export const UserEditProfile = ({ user, tags }: Props) => {
     control,
   });
 
-  const onSubmit: SubmitHandler<SettingsValues> = data => {
-    updateUser(data);
-    updateUserCredentials({
+  const onSubmit: SubmitHandler<SettingsValues> = async data => {
+    await updateUser(data);
+    await updateUserCredentials({
       firstName: data.firstName,
       lastName: data.lastName,
       id: user.id,
     });
-    navigate(ROUTES.HOME);
+    navigate(ROUTES.USER + `/${user.id}`);
   };
 
   return (

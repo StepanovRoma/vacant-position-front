@@ -87,7 +87,44 @@
     }
   },
   "resume": {
-    "showResume": "Посмотреть резюме"
+    "createResume": "Создание резюме",
+    "editResume": "Редактирвоание резюме",
+    "showResume": "Посмотреть резюме",
+    "noExistsResume": "У вас еще нет резюме.",
+    "wantCreate": "Хотите создать?",
+    "myResumes": "Мои резюме",
+    "error": {
+      "requiredField": "Обязательное поле",
+      "maxPositionLength": "Максимум 96 символов",
+      "maxExperienceLength": "Максимум 10 символов",
+      "maxPayrollLength": "Максимум 32 символа",
+      "maxTagsLength": "Максимум 10 тегов",
+      "minTagsLength": "Минимум 1 тег",
+      "maxAboutLength": "Максимум 2048 символов",
+      "maxPreferContactLength": "Максимум 64 символа"
+    },
+    "position": "Доллжность",
+    "experience": "Опыт работы",
+    "payroll": "Зарплатные ожидания",
+    "tags": "Теги",
+    "about": "О себе",
+    "preferContact": "Предпочитаемый способ связи",
+    "phone": "Телефон",
+    "vk": "Вк",
+    "telegram": "Телеграм",
+    "whatsapp": "WhatsApp",
+    "openedResume": "Открытое резюме",
+    "closedResume": "Скрытое резюме",
+    "cancel": "Отмена",
+    "create": "Создать",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "modal": {
+      "modalTitle": "Удаление резюме",
+      "warningMessage": "Вы точно хотите удалить резюме?",
+      "cancel": "Отмена",
+      "delete": "Удалить"
+    }
   },
   "home": {
     "searchPlaceHolder": "Введите название организации или теги...",

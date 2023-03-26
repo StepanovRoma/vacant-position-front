@@ -1,4 +1,5 @@
 import { Tag } from './tags';
+import { IResume } from './resume';
 
 export interface ServerUserBodyResponse {
   id: string;
@@ -31,6 +32,7 @@ export interface ServerExtendedUser {
   updatedAt: string;
   vkontakte: null | string;
   whatsapp: null | string;
+  resumes: IResume[];
 }
 
 export type TUser = ServerExtendedUser;

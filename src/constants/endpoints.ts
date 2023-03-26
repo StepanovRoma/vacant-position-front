@@ -9,4 +9,5 @@ export const API_ENDPOINTS = {
   TAGS: '/tags',
   QUOTE: '/quote',
   INFO: '/info',
+  RESUME: '/resume',
 };

@@ -3,8 +3,11 @@ import { TUser } from 'dtos/user';
 import { Box, Grid, Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { format } from 'date-fns';
+import { TableResumeCard } from 'components/Resume';
 
-import { TagContainer } from './style';
+import { ROUTES } from 'constants/routes';
+
+import { Link, TagContainer } from './style';
 
 interface Props {
   user: TUser;
@@ -12,6 +15,7 @@ interface Props {
 
 export const Personal = ({ user }: Props) => {
   const tr = useI18n('userProfile');
+  const resumeTr = useI18n('resume');
   return (
     <Box display="flex" flexDirection="column" gap="30px">
       <Box display="flex" flexDirection="row" gap="70px">
@@ -69,6 +73,20 @@ export const Personal = ({ user }: Props) => {
 
       <Box display="flex" flexDirection="column" gap="20px">
         <Typography variant="h6">{tr('openСV')}</Typography>
+        {user.resumes.length !== 0 ? (
+          <Grid container spacing={6}>
+            {user.resumes.map(resume => (
+              <Grid item key={resume.id}>
+                <TableResumeCard resume={resume} isMy />
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Box display="flex" flexDirection="row" alignItems="center" gap="6px">
+            <Typography>{resumeTr('noExistsResume')}</Typography>
+            <Link to={ROUTES.CREATE_RESUME}>{resumeTr('wantCreate')}</Link>
+          </Box>
+        )}
       </Box>
     </Box>
   );
