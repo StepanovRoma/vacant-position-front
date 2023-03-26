@@ -1,11 +1,12 @@
-import React from 'react';
-import { Box, Button, CircularProgress, Tooltip } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, CircularProgress, Grid, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
 
 import { placeHolders } from 'constants/placeHolders';
-import { COLOR_PALETTE } from 'constants/theme';
+
+import { ListResumeCard, TableResumeCard } from '../components/Resume';
 
 import {
   FirstTableView,
@@ -19,11 +20,13 @@ import {
   StyledDivider,
   StyledInputBase,
   StyledQuote,
+  SwitchViewButton,
 } from './style';
 
 export const HomePage = () => {
   const tr = useI18n('home');
   const { data: quote, isLoading } = useGetRandomQuoteQuery();
+  const [isTableView, setIsTableView] = useState(true);
 
   return (
     <>
@@ -70,23 +73,35 @@ export const HomePage = () => {
       </HomePageContainer>
       <HomePageLayout display="flex" flexDirection="column">
         <Box display="flex" flexDirection="row" justifyContent="flex-end">
-          <Tooltip title={tr('table')} arrow>
-            <Button sx={{ minWidth: 'fit-content', color: `grey` }}>
-              <FirstTableView />
-            </Button>
-          </Tooltip>
-          <Tooltip title={tr('list')} arrow>
-            <Button
-              sx={{
-                minWidth: 'fit-content',
-                color: `${COLOR_PALETTE.darkPrimary}`,
+          <Tooltip title={isTableView ? tr('table') : tr('list')} arrow>
+            <SwitchViewButton
+              onClick={() => {
+                setIsTableView(prevState => !prevState);
               }}
             >
-              <SecondTableView />
-            </Button>
+              {isTableView ? <FirstTableView /> : <SecondTableView />}
+            </SwitchViewButton>
           </Tooltip>
         </Box>
-        <Box>{'Resumes'}</Box>
+        <Box>
+          {isTableView ? (
+            <Grid container spacing={6}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+                <Grid item key={item}>
+                  <TableResumeCard />
+                </Grid>
+              ))}
+            </Grid>
+          ) : (
+            <Grid container spacing={6}>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
+                <Grid item key={item}>
+                  <ListResumeCard />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </Box>
       </HomePageLayout>
     </>
   );

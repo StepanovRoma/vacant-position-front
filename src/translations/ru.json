@@ -86,6 +86,9 @@
       "maxTagsLength": "Максимум 10 тегов"
     }
   },
+  "resume": {
+    "showResume": "Посмотреть резюме"
+  },
   "home": {
     "searchPlaceHolder": "Введите название организации или теги...",
     "extendedSearch": "Расширенный поиск",

@@ -6,4 +6,8 @@ export const COLOR_PALETTE = {
   error: '#D32F2F',
   black: '#000000',
   white: '#FFFFFF',
+  cardPrimary: '#F3C178',
+  cardSecondary: '#F3C178',
+  purple: '#CBA3FF',
+  darkPurple: '#AE6EFF',
 };
