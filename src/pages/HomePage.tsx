@@ -3,10 +3,11 @@ import { Box, CircularProgress, Grid, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
+import { ListResumeCard, TableResumeCard } from 'components/Resume';
 
 import { placeHolders } from 'constants/placeHolders';
 
-import { ListResumeCard, TableResumeCard } from '../components/Resume';
+import { useGetResumesQuery } from '../ducks/user/api';
 
 import {
   FirstTableView,
@@ -25,8 +26,19 @@ import {
 
 export const HomePage = () => {
   const tr = useI18n('home');
-  const { data: quote, isLoading } = useGetRandomQuoteQuery();
+  const { data: quote, isFetching: isFetchingQuote } = useGetRandomQuoteQuery();
   const [isTableView, setIsTableView] = useState(true);
+  const {
+    data: resumes,
+    isFetching: isFetchingResumes,
+    isSuccess,
+    isError,
+  } = useGetResumesQuery();
+
+  //todo move in separate component
+  if (!isSuccess || isFetchingResumes || isError) {
+    return <CircularProgress />;
+  }
 
   return (
     <>
@@ -37,7 +49,7 @@ export const HomePage = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          {isLoading ? (
+          {isFetchingQuote ? (
             <CircularProgress />
           ) : (
             <StyledQuote>
@@ -86,16 +98,16 @@ export const HomePage = () => {
         <Box>
           {isTableView ? (
             <Grid container spacing={6}>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
-                <Grid item key={item}>
-                  <TableResumeCard />
+              {resumes.resume.map(resume => (
+                <Grid item key={resume.id}>
+                  <TableResumeCard resume={resume} />
                 </Grid>
               ))}
             </Grid>
           ) : (
             <Grid container spacing={6}>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map(item => (
-                <Grid item key={item}>
+              {resumes.resume.map(item => (
+                <Grid item key={item.id}>
                   <ListResumeCard />
                 </Grid>
               ))}

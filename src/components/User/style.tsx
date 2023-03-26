@@ -1,4 +1,5 @@
 import { Avatar, Box, styled, Typography } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -76,4 +77,9 @@ export const InfoBlocksContainer = styled(Box)`
   flex-direction: column;
   gap: 25px;
   width: 100%;
+`;
+
+export const Link = styled(NavLink)`
+  text-decoration: none;
+  font-family: sans-serif;
 `;
