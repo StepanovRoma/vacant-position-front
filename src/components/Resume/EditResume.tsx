@@ -27,7 +27,10 @@ import { InputField } from 'ui/style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useI18n } from 'hooks/useI18n';
 import { IResume } from 'dtos/resume';
-import { useUpdateResumeMutation } from 'ducks/user/api';
+import {
+  useDeleteResumeMutation,
+  useUpdateResumeMutation,
+} from 'ducks/user/api';
 
 import { resumeValidationSchema } from './resumeValidationSchema';
 
@@ -60,6 +63,7 @@ export const EditResume = ({ resume, user }: Props) => {
     isVisible,
   } = resume;
   const [updateResume] = useUpdateResumeMutation();
+  const [deleteResume] = useDeleteResumeMutation();
 
   const {
     control,
@@ -258,7 +262,15 @@ export const EditResume = ({ resume, user }: Props) => {
           gap="12px"
         >
           <Button onClick={() => navigate(-1)}>{tr('cancel')}</Button>
-          <Button color="error">{tr('delete')}</Button>
+          <Button
+            color="error"
+            onClick={async () => {
+              await deleteResume(resume.id);
+              navigate(-1);
+            }}
+          >
+            {tr('delete')}
+          </Button>
           <Button type="submit">{tr('save')}</Button>
         </Box>
       </form>

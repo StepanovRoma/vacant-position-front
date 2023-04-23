@@ -109,6 +109,16 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User', 'Resumes'],
     }),
+    favourResume: build.mutation<void, { userId: string; resumeId: string }>({
+      query: ({ resumeId, userId }) => ({
+        url: `${API_ENDPOINTS.USER}/${userId}`,
+        method: 'patch',
+        data: {
+          resumeId,
+        },
+      }),
+      invalidatesTags: ['User', 'Resumes'],
+    }),
   }),
 });
 

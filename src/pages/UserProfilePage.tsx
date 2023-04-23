@@ -10,18 +10,13 @@ import { ROUTES } from 'constants/routes';
 export const UserProfilePage = () => {
   const { userId = '' } = useParams();
   const navigate = useNavigate();
-  const {
-    data: user,
-    isError,
-    isFetching,
-    isSuccess,
-  } = useGetUserQuery(userId);
+  const { data: user, isError, isLoading, isSuccess } = useGetUserQuery(userId);
 
   if (userId === '' || isError) {
     navigate(ROUTES.PAGE_404);
   }
 
-  if (isFetching || !isSuccess) {
+  if (isLoading || !isSuccess) {
     return <CircularProgress />;
   }
 

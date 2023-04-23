@@ -12,6 +12,7 @@ import { HomePage } from 'pages/HomePage';
 import { UserResumes } from 'pages/UserResumes';
 import { CreateResumePage } from 'pages/CreateResumePage';
 import { EditResumeContainer } from 'components/Resume/EditResumeContainer';
+import { ResumeViewPage } from 'pages/ResumeViewPage';
 
 import { ROUTES } from 'constants/routes';
 
@@ -38,7 +39,10 @@ export const RoutesContainer = () => {
               path={`${ROUTES.EDIT_RESUME}/:resumeId`}
               element={<EditResumeContainer />}
             />
-            <Route path={ROUTES.VACANCY} element={<>{'Вакансии компании'}</>} />
+            <Route
+              path={`${ROUTES.RESUME}/:resumeId`}
+              element={<ResumeViewPage />}
+            />
           </Route>
 
           <Route path={ROUTES.HOME} element={<HomePage />} />

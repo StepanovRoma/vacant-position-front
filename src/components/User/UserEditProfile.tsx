@@ -31,8 +31,11 @@ import {
 } from 'ducks/user/api';
 import { useI18n } from 'hooks/useI18n';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector } from 'react-redux';
 
 import { ROUTES } from 'constants/routes';
+
+import { selectRole } from '../../ducks/auth/selectors';
 
 import {
   ButtonContainer,
@@ -55,6 +58,8 @@ export const UserEditProfile = ({ user, tags }: Props) => {
   const errTr = useI18n('userEdit.validation');
   const [updateUser] = useUpdateUserMutation();
   const [updateUserCredentials] = useUpdateUserCredentialsMutation();
+  const role = useSelector(selectRole);
+  const isCandidate = role === 'candidate';
 
   const {
     control,
@@ -63,7 +68,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
   } = useForm<SettingsValues>({
     defaultValues: {
       firstName: user.firstName,
-      lastName: user.lastName,
+      lastName: isCandidate ? user.lastName : 'empty',
       city: user.city ?? '',
       experience: user.experience ?? '',
       status: String(user.status),
@@ -125,20 +130,22 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 )}
               />
 
-              <Controller
-                name="lastName"
-                control={control}
-                render={({ field }) => (
-                  <InputField
-                    autoComplete="off"
-                    label={tr('lastName')}
-                    variant="outlined"
-                    {...field}
-                    error={!!errors.lastName?.message}
-                    helperText={errTr(errors.lastName?.message)}
-                  />
-                )}
-              />
+              {isCandidate && (
+                <Controller
+                  name="lastName"
+                  control={control}
+                  render={({ field }) => (
+                    <InputField
+                      autoComplete="off"
+                      label={tr('lastName')}
+                      variant="outlined"
+                      {...field}
+                      error={!!errors.lastName?.message}
+                      helperText={errTr(errors.lastName?.message)}
+                    />
+                  )}
+                />
+              )}
 
               <Controller
                 name="city"
@@ -146,7 +153,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 render={({ field }) => (
                   <InputField
                     autoComplete="off"
-                    label={tr('city')}
+                    label={isCandidate ? tr('city') : 'Расположение'}
                     variant="outlined"
                     {...field}
                     error={!!errors.city?.message}
@@ -161,7 +168,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 render={({ field }) => (
                   <InputField
                     autoComplete="off"
-                    label={tr('experience')}
+                    label={isCandidate ? tr('experience') : 'Существует с'}
                     variant="outlined"
                     {...field}
                     error={!!errors.experience?.message}
@@ -291,7 +298,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
             </InfoContainer>
 
             <InfoContainer>
-              <Typography>{tr('about')}</Typography>
+              <Typography>{isCandidate ? tr('about') : 'О нас'}</Typography>
 
               <Controller
                 name="about"

@@ -5,3 +5,7 @@ export const selectIsAuth = (state: RootState) => !!state.auth.user;
 export const selectMeId = (state: RootState) => {
   return state.auth.user?.id;
 };
+
+export const selectRole = (state: RootState) => {
+  return state.auth.user?.role;
+};

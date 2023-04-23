@@ -1,5 +1,12 @@
-import React, { useEffect } from 'react';
-import { Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -31,6 +38,7 @@ export const Register = () => {
   const tr = useI18n('auth');
   const errorsTr = useI18n('auth.validation');
   const dispatch = useDispatch();
+  const [role, setRole] = useState<string>('');
   const [registerUser, { data, isSuccess, error, isLoading }] =
     useRegisterMutation();
   const [getMe] = useLazyGetMeQuery();
@@ -56,6 +64,7 @@ export const Register = () => {
       email: '',
       firstName: '',
       lastName: '',
+      role: '',
       password: '',
       confirmPassword: '',
     },
@@ -98,7 +107,7 @@ export const Register = () => {
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('firstName')}
+                label={role === 'candidate' ? tr('firstName') : tr('name')}
                 variant="outlined"
                 {...field}
                 error={!!errors.firstName?.message}
@@ -107,20 +116,51 @@ export const Register = () => {
             )}
           />
 
-          <Controller
-            name="lastName"
-            control={control}
-            render={({ field }) => (
-              <InputField
-                autoComplete="off"
-                label={tr('lastName')}
-                variant="outlined"
-                {...field}
-                error={!!errors.lastName?.message}
-                helperText={errorsTr(errors.lastName?.message)}
-              />
-            )}
-          />
+          {role === 'candidate' && (
+            <Controller
+              name="lastName"
+              control={control}
+              render={({ field }) => (
+                <InputField
+                  autoComplete="off"
+                  label={tr('lastName')}
+                  variant="outlined"
+                  {...field}
+                  error={!!errors.lastName?.message}
+                  helperText={errorsTr(errors.lastName?.message)}
+                />
+              )}
+            />
+          )}
+
+          <FormControl error={!!errors.role?.message}>
+            <FormLabel>{tr('role')}</FormLabel>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <RadioGroup
+                  {...field}
+                  onChange={(_, value) => {
+                    field.onChange(value);
+                    setRole(value);
+                  }}
+                  style={{ width: '220px' }}
+                >
+                  <FormControlLabel
+                    value="candidate"
+                    control={<Radio />}
+                    label={tr('candidate')}
+                  />
+                  <FormControlLabel
+                    value="organization"
+                    control={<Radio />}
+                    label={tr('organisation')}
+                  />
+                </RadioGroup>
+              )}
+            />
+          </FormControl>
 
           <Controller
             name="password"

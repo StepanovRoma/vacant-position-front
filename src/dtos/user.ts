@@ -8,6 +8,8 @@ export interface ServerUserBodyResponse {
   lastName: string;
   createdAt: string;
   updatedAt: string;
+  image: null | string;
+  role: 'organization' | 'candidate';
 }
 
 export interface ServerUserMeResponse {
@@ -33,6 +35,7 @@ export interface ServerExtendedUser {
   vkontakte: null | string;
   whatsapp: null | string;
   resumes: IResume[];
+  role: 'candidate' | 'organization';
 }
 
 export type TUser = ServerExtendedUser;

@@ -14,6 +14,7 @@ export interface SignUpValues {
   email: string;
   firstName: string;
   lastName: string;
+  role: string;
   password: string;
   confirmPassword: string;
 }

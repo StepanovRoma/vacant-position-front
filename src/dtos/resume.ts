@@ -13,6 +13,7 @@ export interface IResume {
   about: string | null;
   preferContact: string | null;
   isVisible: boolean;
+  role: 'candidate' | 'organization';
 }
 
 export interface ServerResumesResponse {
