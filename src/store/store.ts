@@ -5,6 +5,7 @@ import { authApi } from 'ducks/auth/api';
 import { userApi } from 'ducks/user/api';
 import { tagsApi } from 'ducks/tags/api';
 import { quoteApi } from 'ducks/quote/api';
+import { dataApi } from 'ducks/data/api';
 export const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -12,6 +13,7 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
     [quoteApi.reducerPath]: quoteApi.reducer,
+    [dataApi.reducerPath]: dataApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
@@ -19,6 +21,7 @@ export const store = configureStore({
       userApi.middleware,
       quoteApi.middleware,
       tagsApi.middleware,
+      dataApi.middleware,
     ),
 });
 

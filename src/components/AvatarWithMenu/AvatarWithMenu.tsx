@@ -12,10 +12,11 @@ import { useI18n } from 'hooks/useI18n';
 import { useLazyGetMeQuery } from 'ducks/auth/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from 'ducks/auth';
-import { selectIsAuth, selectMeId } from 'ducks/auth/selectors';
+import { selectImage, selectIsAuth, selectMeId } from 'ducks/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from 'constants/routes';
+import { API_BASE_URL } from 'constants/endpoints';
 
 import { AvatarContainer } from './style';
 
@@ -27,6 +28,7 @@ export const AvatarWithMenu = () => {
   const hasData = useSelector(selectIsAuth);
   const navigate = useNavigate();
   const userId = useSelector(selectMeId);
+  const image = useSelector(selectImage);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -47,7 +49,9 @@ export const AvatarWithMenu = () => {
   return (
     <>
       <IconButton onClick={handleClick}>
-        <AvatarContainer />
+        <AvatarContainer
+          src={image ? `${API_BASE_URL}/media/${image}` : undefined}
+        />
       </IconButton>
       {hasData ? (
         <Menu

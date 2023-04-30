@@ -36,7 +36,11 @@ export const UserProfile = ({ user }: Props) => {
       <UserName variant="h2">{fullName}</UserName>
       <ContentContainer>
         <AvatarContainer>
-          <StyledAvatar variant="square" />
+          <StyledAvatar
+            variant="square"
+            src={user.image ?? undefined}
+            alt={user.firstName}
+          />
           {isMineProfile && (
             <EditLink onClick={() => navigate(`${ROUTES.SETTINGS}`)}>
               {tr('edit')}

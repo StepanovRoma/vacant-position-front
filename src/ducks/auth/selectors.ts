@@ -9,3 +9,7 @@ export const selectMeId = (state: RootState) => {
 export const selectRole = (state: RootState) => {
   return state.auth.user?.role;
 };
+
+export const selectImage = (state: RootState) => {
+  return state.auth.user?.image;
+};
