@@ -1,18 +1,95 @@
 import React from 'react';
 import { IResume } from 'dtos/resume';
-import { CardActions, CardContent } from '@mui/material';
+import { Box, Grid } from '@mui/material';
+import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import { Star } from '@mui/icons-material';
+import { useI18n } from 'hooks/useI18n';
 
-import { ResumeListCard } from './style';
+import { ROUTES } from 'constants/routes';
+
+import {
+  ActionContainer,
+  AvatarListContainer,
+  CardInfoListContainer,
+  ContentContainerListCard,
+  CustomGrid,
+  FavoriteButton,
+  Link,
+  ListAvatar,
+  ListCardContainer,
+  LongAboutContainer,
+  LongWordContainer,
+  MoreButton,
+  ResumeListCard,
+  TagContainer,
+} from './style';
 
 interface Props {
-  resume?: IResume;
+  resume: IResume;
+  isMy?: boolean;
 }
 
 export const ListResumeCard = ({ resume }: Props) => {
+  const navigate = useNavigate();
+  const isCandidate = resume.role === 'candidate';
+  const fullName = !isCandidate
+    ? resume.firstName
+    : `${resume.firstName} ${resume.lastName}`;
+  const tr = useI18n('resume');
   return (
     <ResumeListCard>
-      <CardContent>{resume?.id}</CardContent>
-      <CardActions>{'Sasha'}</CardActions>
+      <ListCardContainer>
+        <AvatarListContainer>
+          <ListAvatar variant="square" />
+          <Link to={`${ROUTES.USER}/${resume.userId}`}>
+            {tr('linkToProfile')}
+          </Link>
+        </AvatarListContainer>
+        <ContentContainerListCard>
+          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <CustomGrid spacing={1} container>
+              {resume.tags?.map(tag => (
+                <Grid key={tag.id} item>
+                  <TagContainer>{tag.tag}</TagContainer>
+                </Grid>
+              ))}
+            </CustomGrid>
+            <Box>{format(new Date(resume.createdAt), 'dd.MM.yyyy')}</Box>
+          </Box>
+
+          <CardInfoListContainer>
+            <Box>
+              <LongWordContainer>{fullName}</LongWordContainer>
+              <LongWordContainer>{resume.position}</LongWordContainer>
+              <LongWordContainer>{resume.experience}</LongWordContainer>
+              <LongWordContainer>{resume.payroll}</LongWordContainer>
+            </Box>
+            <LongAboutContainer>{resume.about}</LongAboutContainer>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+              }}
+            >
+              <ActionContainer>
+                <MoreButton
+                  variant="contained"
+                  onClick={() => {
+                    navigate(`${ROUTES.RESUME}/${resume.id}`);
+                  }}
+                >
+                  {tr('detail')}
+                </MoreButton>
+                <FavoriteButton>
+                  <Star />
+                </FavoriteButton>
+              </ActionContainer>
+            </Box>
+          </CardInfoListContainer>
+        </ContentContainerListCard>
+      </ListCardContainer>
     </ResumeListCard>
   );
 };
