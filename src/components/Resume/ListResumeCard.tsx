@@ -7,8 +7,7 @@ import { Star } from '@mui/icons-material';
 import { useI18n } from 'hooks/useI18n';
 
 import { ROUTES } from 'constants/routes';
-
-import { API_BASE_URL } from '../../constants/endpoints';
+import { API_BASE_URL } from 'constants/endpoints';
 
 import {
   ActionContainer,
