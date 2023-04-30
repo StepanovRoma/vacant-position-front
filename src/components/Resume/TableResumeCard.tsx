@@ -16,6 +16,7 @@ import { useDeleteResumeMutation } from 'ducks/user/api';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from 'constants/routes';
+import { API_BASE_URL } from 'constants/endpoints';
 
 import {
   ActionsContainer,
@@ -91,7 +92,15 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
               </Typography>
             </DateContainer>
             <InfoContainer>
-              <AvatarContainer variant="square" />
+              <AvatarContainer
+                variant="square"
+                src={
+                  resume.image
+                    ? `${API_BASE_URL}/media/${resume.image}`
+                    : undefined
+                }
+                alt={resume.firstName}
+              />
               <ResumeInfoContainer>
                 <LongWordContainer>{fullName}</LongWordContainer>
                 <LongWordContainer>{resume.position}</LongWordContainer>

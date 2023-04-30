@@ -3,8 +3,9 @@ import { axiosBaseQueryFn } from 'tools/request';
 import { ServerExtendedUser } from 'dtos/user';
 import { ResumeValues } from 'components/Resume/CreateResume';
 import { IResume, ServerResumesResponse } from 'dtos/resume';
+import { isAvatarFromBack } from 'components/User/helper';
 
-import { API_ENDPOINTS } from 'constants/endpoints';
+import { API_BASE_URL, API_ENDPOINTS } from 'constants/endpoints';
 
 import { SettingsValues } from './types';
 
@@ -18,6 +19,14 @@ export const userApi = createApi({
         url: API_ENDPOINTS.USERS + `/${userId}`,
         method: 'get',
       }),
+      transformResponse: (response: ServerExtendedUser) => {
+        return {
+          ...response,
+          image: response.image
+            ? `${API_BASE_URL}/media/${response.image}`
+            : null,
+        };
+      },
       providesTags: ['User'],
     }),
     updateUser: build.mutation<void, SettingsValues>({
@@ -37,11 +46,10 @@ export const userApi = createApi({
                   .trim(),
         },
       }),
-      invalidatesTags: ['User'],
     }),
     updateUserCredentials: build.mutation<
       void,
-      { firstName: string; lastName: string; id: string }
+      { firstName: string; lastName: string; id: string; image: string | null }
     >({
       query: user => ({
         url: API_ENDPOINTS.USER + `/${user.id}`,
@@ -49,6 +57,7 @@ export const userApi = createApi({
         data: {
           firstName: user.firstName,
           lastName: user.lastName,
+          image: isAvatarFromBack(user.image) ? undefined : user.image,
         },
       }),
       invalidatesTags: ['User'],

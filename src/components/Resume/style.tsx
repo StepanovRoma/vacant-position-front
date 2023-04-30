@@ -33,8 +33,9 @@ export const MoreButton = styled(Button)`
 `;
 
 export const CustomGrid = styled(Grid)`
-  max-height: 60px;
+  height: 76px;
   overflow: auto;
+  align-items: center;
   ::-webkit-scrollbar {
     width: 6px;
   }
@@ -51,10 +52,9 @@ export const CustomGrid = styled(Grid)`
 export const ResumeCard = styled(Card)`
   min-width: 300px;
   width: 300px;
-  height: 310px;
+  height: 294px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color: ${COLOR_PALETTE.cardPrimary};
 `;
 
@@ -63,13 +63,13 @@ export const DateContainer = styled(Box)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 40px;
 `;
 
 export const CardContentContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   height: 100%;
-  gap: 15px;
   justify-content: space-between;
 `;
 
@@ -103,6 +103,7 @@ export const FavoriteButton = styled(IconButton)`
   box-sizing: border-box;
   min-width: fit-content;
   color: ${COLOR_PALETTE.purple};
+  padding: 0;
 `;
 
 export const ResumeListCard = styled(Card)`
@@ -196,4 +197,21 @@ export const ActionContainer = styled(Box)`
   flex-direction: row;
   gap: 5px;
   align-items: center;
+`;
+
+export const ListCustomGrid = styled(Grid)`
+  height: auto;
+  overflow: auto;
+  align-items: center;
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: inherit;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${COLOR_PALETTE.purple};
+    border-radius: 20px;
+  }
 `;

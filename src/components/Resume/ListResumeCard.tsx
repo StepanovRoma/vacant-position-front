@@ -7,17 +7,18 @@ import { Star } from '@mui/icons-material';
 import { useI18n } from 'hooks/useI18n';
 
 import { ROUTES } from 'constants/routes';
+import { API_BASE_URL } from 'constants/endpoints';
 
 import {
   ActionContainer,
   AvatarListContainer,
   CardInfoListContainer,
   ContentContainerListCard,
-  CustomGrid,
   FavoriteButton,
   Link,
   ListAvatar,
   ListCardContainer,
+  ListCustomGrid,
   LongAboutContainer,
   LongWordContainer,
   MoreButton,
@@ -41,20 +42,26 @@ export const ListResumeCard = ({ resume }: Props) => {
     <ResumeListCard>
       <ListCardContainer>
         <AvatarListContainer>
-          <ListAvatar variant="square" />
+          <ListAvatar
+            variant="square"
+            src={
+              resume.image ? `${API_BASE_URL}/media/${resume.image}` : undefined
+            }
+            alt={resume.firstName}
+          />
           <Link to={`${ROUTES.USER}/${resume.userId}`}>
             {tr('linkToProfile')}
           </Link>
         </AvatarListContainer>
         <ContentContainerListCard>
           <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-            <CustomGrid spacing={1} container>
+            <ListCustomGrid spacing={1} container>
               {resume.tags?.map(tag => (
                 <Grid key={tag.id} item>
                   <TagContainer>{tag.tag}</TagContainer>
                 </Grid>
               ))}
-            </CustomGrid>
+            </ListCustomGrid>
             <Box>{format(new Date(resume.createdAt), 'dd.MM.yyyy')}</Box>
           </Box>
 

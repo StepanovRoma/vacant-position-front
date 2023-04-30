@@ -10,4 +10,5 @@ export const API_ENDPOINTS = {
   QUOTE: '/quote',
   INFO: '/info',
   RESUME: '/resume',
+  MEDIA: '/media',
 };

@@ -6,11 +6,12 @@ export interface SettingsValues {
   city: string | null;
   experience: string | null;
   status: string;
-  image: null;
+  image: string | null;
   about: string | null;
   tags: Tag[] | null;
   vkontakte: string | null;
   telegram: string | null;
   phone: string | null;
   whatsapp: string | null;
+  file: FileList;
 }
