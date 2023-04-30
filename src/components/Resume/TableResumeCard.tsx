@@ -114,7 +114,7 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
               navigate(`${ROUTES.RESUME}/${resume.id}`);
             }}
           >
-            {isCandidate ? tr('showResume') : 'Показать вакансию'}
+            {isCandidate ? tr('showResume') : tr('showVacancy')}
           </MoreButton>
           {!isMy && (
             <FavoriteButton>

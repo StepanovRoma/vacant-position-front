@@ -32,10 +32,9 @@ import {
 import { useI18n } from 'hooks/useI18n';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector } from 'react-redux';
+import { selectRole } from 'ducks/auth/selectors';
 
 import { ROUTES } from 'constants/routes';
-
-import { selectRole } from '../../ducks/auth/selectors';
 
 import {
   ButtonContainer,
@@ -153,7 +152,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 render={({ field }) => (
                   <InputField
                     autoComplete="off"
-                    label={isCandidate ? tr('city') : 'Расположение'}
+                    label={isCandidate ? tr('city') : tr('location')}
                     variant="outlined"
                     {...field}
                     error={!!errors.city?.message}
@@ -168,7 +167,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 render={({ field }) => (
                   <InputField
                     autoComplete="off"
-                    label={isCandidate ? tr('experience') : 'Существует с'}
+                    label={isCandidate ? tr('experience') : tr('existence')}
                     variant="outlined"
                     {...field}
                     error={!!errors.experience?.message}
@@ -298,7 +297,9 @@ export const UserEditProfile = ({ user, tags }: Props) => {
             </InfoContainer>
 
             <InfoContainer>
-              <Typography>{isCandidate ? tr('about') : 'О нас'}</Typography>
+              <Typography>
+                {isCandidate ? tr('about') : tr('companyAbout')}
+              </Typography>
 
               <Controller
                 name="about"

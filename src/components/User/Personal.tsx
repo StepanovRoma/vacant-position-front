@@ -24,8 +24,8 @@ export const Personal = ({ user }: Props) => {
     <Box display="flex" flexDirection="column" gap="30px">
       <Box display="flex" flexDirection="row" gap="70px">
         <Box display="flex" flexDirection="column" gap="20px">
-          <Box>{isCandidate ? tr('livingPlace') : 'Расположение'}</Box>
-          <Box>{isCandidate ? tr('workExperience') : 'Существует с'}</Box>
+          <Box>{isCandidate ? tr('livingPlace') : tr('location')}</Box>
+          <Box>{isCandidate ? tr('workExperience') : tr('existence')}</Box>
           <Box>{tr('email')}</Box>
           <Box>{tr('findingStatus')}</Box>
           <Box>{tr('registerDate')}</Box>
@@ -72,14 +72,14 @@ export const Personal = ({ user }: Props) => {
 
       <Box display="flex" flexDirection="column" gap="20px">
         <Typography variant="h6">
-          {isCandidate ? tr('about') : 'О нас'}
+          {isCandidate ? tr('about') : tr('companyAbout')}
         </Typography>
         <Typography>{user.about ? user.about : tr('notSpecified')}</Typography>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
         <Typography variant="h6">
-          {isCandidate ? tr('openСV') : 'Открытые вакансии'}
+          {isCandidate ? tr('openСV') : tr('openVacancy')}
         </Typography>
         {user.resumes.length !== 0 ? (
           <Grid container spacing={6}>
@@ -97,7 +97,7 @@ export const Personal = ({ user }: Props) => {
             <Typography>
               {isCandidate
                 ? resumeTr('noExistsResume')
-                : 'У вас еще нет вакансий'}
+                : resumeTr('noExistsVacancy')}
             </Typography>
             <Link to={ROUTES.CREATE_RESUME}>{resumeTr('wantCreate')}</Link>
           </Box>

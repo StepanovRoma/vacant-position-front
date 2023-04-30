@@ -43,7 +43,9 @@
   "userProfile": {
     "edit": "Редактировать профиль",
     "livingPlace": "Место проживания",
+    "location": "Расположение",
     "workExperience": "Опыт работы",
+    "existence": "Существует с",
     "email": "Почта",
     "findingStatus": "Статус поиска",
     "registerDate": "Дата регистарции",
@@ -55,9 +57,11 @@
     "lookingFor": "Ищу",
     "notLookingFor": "Не ищу",
     "openСV": "Открытые резюме",
+    "openVacancy": "Открытые вакансии",
     "about": "О себе",
     "tags": "Теги",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "companyAbout": "О нас"
   },
   "userEdit": {
     "changeAvatar": "Изменить аватар",
@@ -94,7 +98,9 @@
     "createResume": "Создание резюме",
     "editResume": "Редактирвоание резюме",
     "showResume": "Посмотреть резюме",
+    "showVacancy": "Посмотреть вакансию",
     "noExistsResume": "У вас еще нет резюме.",
+    "noExistsVacancy": "У вас еще нет вакансий.",
     "wantCreate": "Хотите создать?",
     "myResumes": "Мои резюме",
     "myVacancies": "Мои вакансии",

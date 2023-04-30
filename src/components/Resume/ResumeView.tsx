@@ -14,10 +14,9 @@ import { format } from 'date-fns';
 import { Link } from 'components/User/style';
 import { useI18n } from 'hooks/useI18n';
 import { useSelector } from 'react-redux';
+import { selectRole } from 'ducks/auth/selectors';
 
 import { ROUTES } from 'constants/routes';
-
-import { selectRole } from '../../ducks/auth/selectors';
 
 import { TagContainer } from './style';
 
