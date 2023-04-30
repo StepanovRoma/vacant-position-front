@@ -4,6 +4,8 @@ import { Box, Grid, Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { format } from 'date-fns';
 import { TableResumeCard } from 'components/Resume';
+import { useSelector } from 'react-redux';
+import { selectMeId } from 'ducks/auth/selectors';
 
 import { ROUTES } from 'constants/routes';
 
@@ -16,12 +18,14 @@ interface Props {
 export const Personal = ({ user }: Props) => {
   const tr = useI18n('userProfile');
   const resumeTr = useI18n('resume');
+  const myId = useSelector(selectMeId);
+  const isCandidate = user.role === 'candidate';
   return (
     <Box display="flex" flexDirection="column" gap="30px">
       <Box display="flex" flexDirection="row" gap="70px">
         <Box display="flex" flexDirection="column" gap="20px">
-          <Box>{tr('livingPlace')}</Box>
-          <Box>{tr('workExperience')}</Box>
+          <Box>{isCandidate ? tr('livingPlace') : tr('location')}</Box>
+          <Box>{isCandidate ? tr('workExperience') : tr('existence')}</Box>
           <Box>{tr('email')}</Box>
           <Box>{tr('findingStatus')}</Box>
           <Box>{tr('registerDate')}</Box>
@@ -67,23 +71,34 @@ export const Personal = ({ user }: Props) => {
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{tr('about')}</Typography>
+        <Typography variant="h6">
+          {isCandidate ? tr('about') : tr('companyAbout')}
+        </Typography>
         <Typography>{user.about ? user.about : tr('notSpecified')}</Typography>
       </Box>
 
       <Box display="flex" flexDirection="column" gap="20px">
-        <Typography variant="h6">{tr('openСV')}</Typography>
+        <Typography variant="h6">
+          {isCandidate ? tr('openСV') : tr('openVacancy')}
+        </Typography>
         {user.resumes.length !== 0 ? (
           <Grid container spacing={6}>
             {user.resumes.map(resume => (
               <Grid item key={resume.id}>
-                <TableResumeCard resume={resume} isMy />
+                <TableResumeCard
+                  resume={resume}
+                  isMy={myId === resume.userId}
+                />
               </Grid>
             ))}
           </Grid>
         ) : (
           <Box display="flex" flexDirection="row" alignItems="center" gap="6px">
-            <Typography>{resumeTr('noExistsResume')}</Typography>
+            <Typography>
+              {isCandidate
+                ? resumeTr('noExistsResume')
+                : resumeTr('noExistsVacancy')}
+            </Typography>
             <Link to={ROUTES.CREATE_RESUME}>{resumeTr('wantCreate')}</Link>
           </Box>
         )}

@@ -45,6 +45,10 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
   const tr = useI18n('resume');
   const modalTr = useI18n('resume.modal');
   const navigate = useNavigate();
+  const isCandidate = resume.role === 'candidate';
+  const fullName = !isCandidate
+    ? resume.firstName
+    : `${resume.firstName} ${resume.lastName}`;
 
   const handleDelete = useCallback(() => {
     setIsOpenModal(false);
@@ -88,7 +92,7 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
             <InfoContainer>
               <AvatarContainer variant="square" />
               <ResumeInfoContainer>
-                <Typography>{`${resume.firstName} ${resume.lastName}`}</Typography>
+                <Typography>{fullName}</Typography>
                 <Typography>{resume.position}</Typography>
                 <Typography>{resume.experience}</Typography>
                 <Typography>{resume.payroll}</Typography>
@@ -104,7 +108,14 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
           </CardContentContainer>
         </CardContent>
         <ActionsContainer>
-          <MoreButton variant="contained">{tr('showResume')}</MoreButton>
+          <MoreButton
+            variant="contained"
+            onClick={() => {
+              navigate(`${ROUTES.RESUME}/${resume.id}`);
+            }}
+          >
+            {isCandidate ? tr('showResume') : tr('showVacancy')}
+          </MoreButton>
           {!isMy && (
             <FavoriteButton>
               <Star />

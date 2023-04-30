@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { TUser } from 'dtos/user';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectMeId } from 'ducks/auth/selectors';
+import { selectMeId, selectRole } from 'ducks/auth/selectors';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from 'hooks/useI18n';
 import { UserName } from 'pages/style';
@@ -26,9 +26,14 @@ export const UserProfile = ({ user }: Props) => {
   const isMineProfile = useSelector(selectMeId) === user.id;
   const navigate = useNavigate();
   const tr = useI18n('userProfile');
+  const role = useSelector(selectRole);
+  const fullName =
+    role === 'organization'
+      ? user.firstName
+      : `${user.firstName} ${user.lastName}`;
   return (
     <UserProfileContainer>
-      <UserName variant="h2">{`${user.firstName} ${user.lastName}`}</UserName>
+      <UserName variant="h2">{fullName}</UserName>
       <ContentContainer>
         <AvatarContainer>
           <StyledAvatar variant="square" />

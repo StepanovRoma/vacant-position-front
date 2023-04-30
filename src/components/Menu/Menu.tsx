@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { useI18n } from 'hooks/useI18n';
 import { useSelector } from 'react-redux';
-import { selectMeId } from 'ducks/auth/selectors';
+import { selectMeId, selectRole } from 'ducks/auth/selectors';
 
 import { MENU } from 'constants/routes';
 
@@ -23,6 +23,8 @@ export const Menu = () => {
   const navigate = useNavigate();
   const userId = useSelector(selectMeId);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+  const role = useSelector(selectRole);
+  const isCandidate = role === 'candidate';
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -37,6 +39,13 @@ export const Menu = () => {
 
       setIsOpenMenu(open);
     };
+
+  const menu = MENU.map(menuItem => {
+    if (menuItem.pageName === 'myResumes' && !isCandidate) {
+      return { ...menuItem, pageName: 'myVacancies' };
+    }
+    return menuItem;
+  });
 
   return (
     <>
@@ -55,7 +64,7 @@ export const Menu = () => {
           onKeyDown={toggleDrawer(false)}
         >
           <List>
-            {MENU.map(menuItem => (
+            {menu.map(menuItem => (
               <ListItem key={menuItem.pageName} disablePadding>
                 <ListItemButton
                   onClick={() => {

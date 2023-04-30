@@ -5,7 +5,7 @@ import { Link } from 'components/User/style';
 import { useI18n } from 'hooks/useI18n';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectMeId } from 'ducks/auth/selectors';
+import { selectMeId, selectRole } from 'ducks/auth/selectors';
 import { useGetUserQuery } from 'ducks/user/api';
 import { TableResumeCard } from 'components/Resume';
 
@@ -15,6 +15,8 @@ export const UserResumes = () => {
   const tr = useI18n('resume');
   const navigate = useNavigate();
   const meId = useSelector(selectMeId);
+  const role = useSelector(selectRole);
+  const isCandidate = role === 'candidate';
   const {
     data: user,
     isError,
@@ -32,7 +34,7 @@ export const UserResumes = () => {
   return (
     <PageLayout>
       <Box display="flex" flexDirection="column" gap="20px">
-        <PageTitle>{tr('myResumes')}</PageTitle>
+        <PageTitle>{isCandidate ? tr('myResumes') : 'Мои вакансии'}</PageTitle>
         {user.resumes.length > 0 ? (
           <Grid container spacing={6}>
             {user.resumes.map(resume => (

@@ -15,5 +15,4 @@ export const MENU = [
   { pageName: 'profile', route: ROUTES.USER },
   { pageName: 'mainPage', route: ROUTES.HOME },
   { pageName: 'myResumes', route: ROUTES.RESUME },
-  { pageName: 'myVacancies', route: ROUTES.VACANCY },
 ];

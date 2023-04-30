@@ -26,14 +26,15 @@ export const authApi = createApi({
       ServerAuthResponse,
       Omit<SignUpValues, 'confirmPassword'>
     >({
-      query: credentials => ({
+      query: ({ email, firstName, lastName, password, role }) => ({
         url: API_ENDPOINTS.REGISTER,
         method: 'post',
         data: {
-          email: credentials.email,
-          firstName: credentials.firstName,
-          lastName: credentials.lastName,
-          password: credentials.password,
+          email,
+          firstName,
+          lastName: lastName.length > 0 ? lastName : 'empty',
+          role,
+          password,
         },
       }),
     }),
