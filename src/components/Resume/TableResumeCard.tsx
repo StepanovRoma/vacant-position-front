@@ -25,6 +25,7 @@ import {
   DateContainer,
   FavoriteButton,
   InfoContainer,
+  LongWordContainer,
   ModalContent,
   ModalText,
   ModalTitle,
@@ -92,10 +93,10 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
             <InfoContainer>
               <AvatarContainer variant="square" />
               <ResumeInfoContainer>
-                <Typography>{fullName}</Typography>
-                <Typography>{resume.position}</Typography>
-                <Typography>{resume.experience}</Typography>
-                <Typography>{resume.payroll}</Typography>
+                <LongWordContainer>{fullName}</LongWordContainer>
+                <LongWordContainer>{resume.position}</LongWordContainer>
+                <LongWordContainer>{resume.experience}</LongWordContainer>
+                <LongWordContainer>{resume.payroll}</LongWordContainer>
               </ResumeInfoContainer>
             </InfoContainer>
             <CustomGrid spacing={1} container>

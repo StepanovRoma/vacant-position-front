@@ -106,9 +106,9 @@ export const HomePage = () => {
             </Grid>
           ) : (
             <Grid container spacing={6}>
-              {resumes.resume.map(item => (
-                <Grid item key={item.id}>
-                  <ListResumeCard />
+              {resumes.resume.map(resume => (
+                <Grid item key={resume.id}>
+                  <ListResumeCard resume={resume} />
                 </Grid>
               ))}
             </Grid>

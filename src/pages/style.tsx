@@ -145,4 +145,7 @@ export const UserName = styled(Typography)`
 export const SwitchViewButton = styled(Button)`
   min-width: fit-content;
   color: ${COLOR_PALETTE.darkPrimary};
+  @media (max-width: 790px) {
+    display: none;
+  }
 `;

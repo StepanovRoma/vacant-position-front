@@ -9,6 +9,7 @@ import {
   styled,
   Typography,
 } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -106,7 +107,7 @@ export const FavoriteButton = styled(IconButton)`
 
 export const ResumeListCard = styled(Card)`
   width: calc(100vw - 180px);
-  height: 310px;
+  height: 255px;
   background-color: ${COLOR_PALETTE.cardPrimary};
   @media (max-width: 790px) {
     width: calc(100vw - 75px);
@@ -131,4 +132,68 @@ export const ModalText = styled(Typography)`
 export const ModalTitle = styled(Typography)`
   font-size: 24px;
   margin-bottom: 20px;
+`;
+
+export const AvatarListContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
+
+export const Link = styled(NavLink)`
+  text-decoration: none;
+  font-family: sans-serif;
+`;
+
+export const LongWordContainer = styled(Typography)`
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+  overflow: hidden;
+`;
+
+export const ListCardContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 16px;
+  gap: 10px;
+`;
+
+export const ListAvatar = styled(Avatar)`
+  height: 200px;
+  width: 200px;
+`;
+
+export const CardInfoListContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  gap: 10px;
+  flex-grow: 1;
+`;
+
+export const ContentContainerListCard = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+`;
+
+export const LongAboutContainer = styled(Typography)`
+  text-overflow: ellipsis;
+  height: 187px;
+  overflow: hidden;
+`;
+
+export const ActionContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
 `;
