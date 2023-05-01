@@ -5,7 +5,7 @@ x-frontend:
   container_name: vacant-position-$PROFILE
   restart: always
   pull_policy: always
-  env_file: .env.local.local
+  env_file: .env.local
   build:
     context: .
     dockerfile: deploy/Dockerfile
