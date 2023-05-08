@@ -7,17 +7,15 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   MenuItem,
   OutlinedInput,
-  Radio,
   RadioGroup,
   Select,
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Tag } from 'dtos/tags';
-import { InputField } from 'ui/style';
+import { ColoredFormLabel, ColoredRadio, InputField } from 'ui/style';
 import {
   Controller,
   FormProvider,
@@ -193,7 +191,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 />
 
                 <FormControl>
-                  <FormLabel>{tr('status')}</FormLabel>
+                  <ColoredFormLabel>{tr('status')}</ColoredFormLabel>
                   <Controller
                     name="status"
                     control={control}
@@ -201,12 +199,12 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                       <RadioGroup {...field} row>
                         <FormControlLabel
                           value="true"
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('lookingFor')}
                         />
                         <FormControlLabel
                           value="false"
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('notLookingFor')}
                         />
                       </RadioGroup>

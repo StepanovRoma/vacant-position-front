@@ -11,10 +11,8 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   MenuItem,
   OutlinedInput,
-  Radio,
   RadioGroup,
   Select,
   Typography,
@@ -23,7 +21,7 @@ import React from 'react';
 import { Tag } from 'dtos/tags';
 import { ServerExtendedUser } from 'dtos/user';
 import { useNavigate } from 'react-router-dom';
-import { InputField } from 'ui/style';
+import { ColoredFormLabel, ColoredRadio, InputField } from 'ui/style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useI18n } from 'hooks/useI18n';
 import { IResume } from 'dtos/resume';
@@ -200,7 +198,7 @@ export const EditResume = ({ resume, user }: Props) => {
             )}
           />
           <FormControl>
-            <FormLabel>{tr('preferContact')}</FormLabel>
+            <ColoredFormLabel>{tr('preferContact')}</ColoredFormLabel>
             <Controller
               name="preferContact"
               control={control}
@@ -210,28 +208,28 @@ export const EditResume = ({ resume, user }: Props) => {
                     {user.phone && (
                       <FormControlLabel
                         value={user.phone}
-                        control={<Radio />}
+                        control={<ColoredRadio />}
                         label={tr('phone')}
                       />
                     )}
                     {user.vkontakte && (
                       <FormControlLabel
                         value={user.vkontakte}
-                        control={<Radio />}
+                        control={<ColoredRadio />}
                         label={tr('vk')}
                       />
                     )}
                     {user.telegram && (
                       <FormControlLabel
                         value={user.telegram}
-                        control={<Radio />}
+                        control={<ColoredRadio />}
                         label={tr('telegram')}
                       />
                     )}
                     {user.whatsapp && (
                       <FormControlLabel
                         value={user.whatsapp}
-                        control={<Radio />}
+                        control={<ColoredRadio />}
                         label={tr('whatsapp')}
                       />
                     )}
@@ -249,14 +247,14 @@ export const EditResume = ({ resume, user }: Props) => {
                 <RadioGroup {...field} row>
                   <FormControlLabel
                     value="true"
-                    control={<Radio />}
+                    control={<ColoredRadio />}
                     label={
                       isCandidate ? tr('openedResume') : tr('openedVacancy')
                     }
                   />
                   <FormControlLabel
                     value="false"
-                    control={<Radio />}
+                    control={<ColoredRadio />}
                     label={
                       isCandidate ? tr('closedResume') : tr('closedVacancy')
                     }

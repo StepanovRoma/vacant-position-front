@@ -1,4 +1,11 @@
-import { Box, styled, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  FormLabel,
+  Radio,
+  styled,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import { COLOR_PALETTE } from 'constants/theme';
 
@@ -25,4 +32,16 @@ export const InputField = styled(TextField)`
 export const PageTitle = styled(Typography)`
   width: 100%;
   font-size: 32px;
+`;
+
+export const ColoredFormLabel = styled(FormLabel)`
+  &.MuiFormLabel-root.Mui-focused {
+    color: ${COLOR_PALETTE.darkPrimary};
+  }
+`;
+
+export const ColoredRadio = styled(Radio)`
+  &.MuiRadio-colorPrimary.Mui-checked {
+    color: ${COLOR_PALETTE.darkPrimary};
+  }
 `;
