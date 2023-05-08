@@ -1,6 +1,6 @@
 import React from 'react';
 import { TUser } from 'dtos/user';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { format } from 'date-fns';
 import { TableResumeCard } from 'components/Resume';
@@ -9,7 +9,7 @@ import { selectMeId } from 'ducks/auth/selectors';
 
 import { ROUTES } from 'constants/routes';
 
-import { Link, TagContainer } from './style';
+import { CreateResumeContainer, Link, TagContainer } from './style';
 
 interface Props {
   user: TUser;
@@ -91,6 +91,19 @@ export const Personal = ({ user }: Props) => {
                 />
               </Grid>
             ))}
+            {myId === user.id && (
+              <Grid item>
+                <CreateResumeContainer>
+                  <Link to={ROUTES.CREATE_RESUME}>
+                    <Button variant="text">
+                      {isCandidate
+                        ? resumeTr('createOneMoreResume')
+                        : resumeTr('createOneMoreVacancy')}
+                    </Button>
+                  </Link>
+                </CreateResumeContainer>
+              </Grid>
+            )}
           </Grid>
         ) : (
           <Box display="flex" flexDirection="row" alignItems="center" gap="6px">

@@ -3,7 +3,6 @@ import { AppBar, styled, Toolbar, Typography } from '@mui/material';
 import { COLOR_PALETTE } from 'constants/theme';
 
 export const HeaderContainer = styled(AppBar)`
-  position: static;
   height: 119px;
   background-color: ${COLOR_PALETTE.primary};
 `;

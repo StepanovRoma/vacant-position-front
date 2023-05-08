@@ -36,6 +36,7 @@ import { useSelector } from 'react-redux';
 import { selectRole } from 'ducks/auth/selectors';
 import { ImageInput } from 'ui/ImageInput';
 import { useUploadImageMutation } from 'ducks/data/api';
+import { getSelectedTagsStyles } from 'tools/helpers';
 
 import { ROUTES } from 'constants/routes';
 
@@ -287,6 +288,9 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                         ))}
                       </Box>
                     )}
+                    MenuProps={{
+                      disableScrollLock: true,
+                    }}
                   >
                     {tags.map(tag => (
                       <MenuItem
@@ -302,6 +306,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                             remove(id);
                           }
                         }}
+                        style={getSelectedTagsStyles(tag.tag, fields)}
                       >
                         {tag.tag}
                       </MenuItem>

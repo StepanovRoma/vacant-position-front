@@ -123,7 +123,7 @@ export const userApi = createApi({
         url: `${API_ENDPOINTS.USER}/${userId}`,
         method: 'patch',
         data: {
-          resumeId,
+          favourite: resumeId,
         },
       }),
       invalidatesTags: ['User', 'Resumes'],

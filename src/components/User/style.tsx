@@ -83,3 +83,15 @@ export const Link = styled(NavLink)`
   text-decoration: none;
   font-family: sans-serif;
 `;
+
+export const CreateResumeContainer = styled(Box)`
+  width: 300px;
+  height: 294px;
+  display: flex;
+  flex-direction: column;
+  border: 0.5px gray dashed;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 4px;
+`;

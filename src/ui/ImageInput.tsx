@@ -4,6 +4,8 @@ import { Typography } from '@mui/material';
 import { useI18n } from 'hooks/useI18n';
 import { useFormContext } from 'react-hook-form';
 
+import { COLOR_PALETTE } from 'constants/theme';
+
 interface Props {
   name: string;
   image: string | null;
@@ -36,7 +38,16 @@ export const ImageInput = ({ name, image }: Props) => {
     <>
       <StyledAvatar src={fileData} variant="square" />
       <label htmlFor="upload-photo">
-        <Typography>{tr('changeAvatar')}</Typography>
+        <Typography
+          color={COLOR_PALETTE.darkPrimary}
+          style={{
+            fontFamily: 'Open-sans, sans-serif',
+            fontSize: '13px',
+            fontWeight: '700',
+          }}
+        >
+          {tr('changeAvatar')}
+        </Typography>
       </label>
       <input
         {...register(name, { onChange: handleOnChange })}

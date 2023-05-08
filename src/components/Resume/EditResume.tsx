@@ -32,6 +32,8 @@ import {
   useUpdateResumeMutation,
 } from 'ducks/user/api';
 
+import { getSelectedTagsStyles } from '../../tools/helpers';
+
 import { resumeValidationSchema } from './resumeValidationSchema';
 
 export interface ResumeValues {
@@ -64,6 +66,7 @@ export const EditResume = ({ resume, user }: Props) => {
   } = resume;
   const [updateResume] = useUpdateResumeMutation();
   const [deleteResume] = useDeleteResumeMutation();
+  const isCandidate = user.role === 'candidate';
 
   const {
     control,
@@ -133,7 +136,7 @@ export const EditResume = ({ resume, user }: Props) => {
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('payroll')}
+                label={isCandidate ? tr('payroll') : tr('salary')}
                 variant="outlined"
                 {...field}
                 error={!!errors.payroll?.message}
@@ -155,6 +158,9 @@ export const EditResume = ({ resume, user }: Props) => {
                   ))}
                 </Box>
               )}
+              MenuProps={{
+                disableScrollLock: true,
+              }}
             >
               {user?.tags?.map(tag => (
                 <MenuItem
@@ -170,6 +176,7 @@ export const EditResume = ({ resume, user }: Props) => {
                       remove(id);
                     }
                   }}
+                  style={getSelectedTagsStyles(tag.tag, fields)}
                 >
                   {tag.tag}
                 </MenuItem>
@@ -184,7 +191,7 @@ export const EditResume = ({ resume, user }: Props) => {
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('about')}
+                label={isCandidate ? tr('about') : tr('companyAbout')}
                 variant="outlined"
                 {...field}
                 error={!!errors.about?.message}
@@ -243,12 +250,16 @@ export const EditResume = ({ resume, user }: Props) => {
                   <FormControlLabel
                     value="true"
                     control={<Radio />}
-                    label={tr('openedResume')}
+                    label={
+                      isCandidate ? tr('openedResume') : tr('openedVacancy')
+                    }
                   />
                   <FormControlLabel
                     value="false"
                     control={<Radio />}
-                    label={tr('closedResume')}
+                    label={
+                      isCandidate ? tr('closedResume') : tr('closedVacancy')
+                    }
                   />
                 </RadioGroup>
               )}

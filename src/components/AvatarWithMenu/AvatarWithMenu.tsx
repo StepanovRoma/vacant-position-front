@@ -59,6 +59,7 @@ export const AvatarWithMenu = () => {
           open={!!anchorEl}
           onClose={handleClose}
           onClick={handleClose}
+          disableScrollLock
         >
           <MenuItem
             onClick={() => {

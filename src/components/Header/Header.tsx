@@ -8,7 +8,7 @@ import { HeaderContainer, HeaderTitle, HeaderToolBar } from './style';
 export const Header = () => {
   const tr = useI18n('general');
   return (
-    <HeaderContainer>
+    <HeaderContainer position="sticky">
       <HeaderToolBar>
         <Menu />
         <HeaderTitle>{tr('applicationName')}</HeaderTitle>

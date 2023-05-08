@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageLayout, PageTitle } from 'ui/style';
-import { Box, CircularProgress, Grid, Typography } from '@mui/material';
-import { Link } from 'components/User/style';
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
+import { CreateResumeContainer, Link } from 'components/User/style';
 import { useI18n } from 'hooks/useI18n';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -42,6 +42,17 @@ export const UserResumes = () => {
                 <TableResumeCard resume={resume} isMy />
               </Grid>
             ))}
+            <Grid item>
+              <CreateResumeContainer>
+                <Link to={ROUTES.CREATE_RESUME}>
+                  <Button variant="text">
+                    {isCandidate
+                      ? tr('createOneMoreResume')
+                      : tr('createOneMoreVacancy')}
+                  </Button>
+                </Link>
+              </CreateResumeContainer>
+            </Grid>
           </Grid>
         ) : (
           <Box display="flex" flexDirection="row" alignItems="center" gap="6px">

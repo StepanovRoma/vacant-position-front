@@ -190,6 +190,8 @@ export const LongAboutContainer = styled(Typography)`
   text-overflow: ellipsis;
   height: 187px;
   overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-all;
 `;
 
 export const ActionContainer = styled(Box)`
