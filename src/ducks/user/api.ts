@@ -7,7 +7,11 @@ import { isAvatarFromBack } from 'components/User/helper';
 
 import { API_BASE_URL, API_ENDPOINTS } from 'constants/endpoints';
 
-import { SettingsValues } from './types';
+import {
+  ExtendedSearchParams,
+  ServerSearchResult,
+  SettingsValues,
+} from './types';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -118,15 +122,40 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User', 'Resumes'],
     }),
-    favourResume: build.mutation<void, { userId: string; resumeId: string }>({
-      query: ({ resumeId, userId }) => ({
-        url: `${API_ENDPOINTS.USERS}/${userId}`,
+    favourResume: build.mutation<void, string>({
+      query: resumeId => ({
+        url: `${API_ENDPOINTS.USERS}/${API_ENDPOINTS.FAVOURITE}`,
         method: 'patch',
         data: {
           favourite: resumeId,
         },
       }),
       invalidatesTags: ['User', 'Resumes'],
+    }),
+    getSearchJobs: build.query<
+      ServerSearchResult,
+      { requiredParameter?: string; city?: string }
+    >({
+      query: ({ requiredParameter, city }) => ({
+        url: `${API_ENDPOINTS.SEARCH}`,
+        method: 'get',
+        params: {
+          requiredParameter,
+          city,
+        },
+      }),
+      providesTags: ['Resumes'],
+    }),
+    getExtendedSearchJobs: build.query<
+      ServerSearchResult,
+      ExtendedSearchParams
+    >({
+      query: searchParams => ({
+        url: `${API_ENDPOINTS.SEARCH}/with-params`,
+        method: 'get',
+        params: { ...searchParams },
+      }),
+      providesTags: ['Resumes'],
     }),
   }),
 });
@@ -140,4 +169,7 @@ export const {
   useDeleteResumeMutation,
   useGetResumeQuery,
   useUpdateResumeMutation,
+  useFavourResumeMutation,
+  useLazyGetExtendedSearchJobsQuery,
+  useLazyGetSearchJobsQuery,
 } = userApi;

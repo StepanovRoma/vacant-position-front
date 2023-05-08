@@ -15,6 +15,7 @@ export interface IResume {
   isVisible: boolean;
   role: 'candidate' | 'organization';
   image: string | null;
+  isFavourite: boolean;
 }
 
 export interface ServerResumesResponse {
