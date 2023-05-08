@@ -36,10 +36,15 @@ export const EditResumeContainer = () => {
   if (isFetching || !isSuccess || !isResumeSuccess || isResumeFetching) {
     return <CircularProgress />;
   }
+
+  const isCandidate = user.role === 'candidate';
+
   return (
     <PageLayout>
       <Box display="flex" flexDirection="column" gap="20px">
-        <PageTitle>{tr('editResume')}</PageTitle>
+        <PageTitle>
+          {isCandidate ? tr('editResume') : tr('editVacancy')}
+        </PageTitle>
         <EditResume user={user} resume={resume} />
       </Box>
     </PageLayout>

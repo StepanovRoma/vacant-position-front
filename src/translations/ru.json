@@ -69,11 +69,14 @@
     "name": "Имя*",
     "lastName": "Фамилия*",
     "city": "Место проживания",
+    "location": "Расположение",
+    "existence": "Существует с",
     "experience": "Опыт работы",
     "status": "Статус поиска",
     "lookingFor": "ищу",
     "notLookingFor": "не ищу",
     "contacts": "Контакты",
+    "companyAbout": "О нас",
     "vk": "Вк",
     "telegram": "Телеграм",
     "phone": "Номер телефона",
@@ -96,7 +99,9 @@
   },
   "resume": {
     "createResume": "Создание резюме",
+    "createVacancy": "Создание вакансии",
     "editResume": "Редактирвоание резюме",
+    "editVacancy": "Редактирвоание вакансии",
     "showResume": "Посмотреть резюме",
     "showVacancy": "Посмотреть вакансию",
     "noExistsResume": "У вас еще нет резюме.",
@@ -105,6 +110,8 @@
     "myResumes": "Мои резюме",
     "myVacancies": "Мои вакансии",
     "resumeTitle": "Резюме",
+    "createOneMoreResume": "Создать еще резюме",
+    "createOneMoreVacancy": "Создать еще вакансию",
     "error": {
       "requiredField": "Обязательное поле",
       "maxPositionLength": "Максимум 96 символов",
@@ -119,6 +126,7 @@
     "position": "Должность",
     "experience": "Опыт работы",
     "payroll": "Зарплатные ожидания",
+    "salary": "Заработная плата",
     "tags": "Теги",
     "about": "О себе",
     "preferContact": "Предпочитаемый способ связи",
@@ -132,6 +140,8 @@
     "whatsapp": "WhatsApp",
     "openedResume": "Открытое резюме",
     "closedResume": "Скрытое резюме",
+    "openedVacancy": "Открытая вакансия",
+    "closedVacancy": "Скрытая вакансия",
     "cancel": "Отмена",
     "create": "Создать",
     "save": "Сохранить",
@@ -142,7 +152,8 @@
       "cancel": "Отмена",
       "delete": "Удалить"
     },
-    "detail": "Подробнее"
+    "detail": "Подробнее",
+    "companyAbout": "О нас"
   },
   "home": {
     "searchPlaceHolder": "Введите название организации или теги...",

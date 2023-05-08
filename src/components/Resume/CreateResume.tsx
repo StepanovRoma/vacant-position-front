@@ -11,10 +11,8 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   MenuItem,
   OutlinedInput,
-  Radio,
   RadioGroup,
   Select,
   Typography,
@@ -23,10 +21,11 @@ import React from 'react';
 import { Tag } from 'dtos/tags';
 import { ServerExtendedUser } from 'dtos/user';
 import { useNavigate } from 'react-router-dom';
-import { InputField } from 'ui/style';
+import { ColoredFormLabel, ColoredRadio, InputField } from 'ui/style';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useCreateResumeMutation } from 'ducks/user/api';
 import { useI18n } from 'hooks/useI18n';
+import { getSelectedTagsStyles } from 'tools/helpers';
 
 import { ROUTES } from 'constants/routes';
 
@@ -51,6 +50,8 @@ export const CreateResume = ({ user }: Props) => {
   const errTr = useI18n('resume.error');
   const navigate = useNavigate();
   const [createResume] = useCreateResumeMutation();
+  const isCandidate = user.role === 'candidate';
+
   const {
     control,
     handleSubmit,
@@ -123,7 +124,7 @@ export const CreateResume = ({ user }: Props) => {
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('payroll')}
+                label={isCandidate ? tr('payroll') : tr('salary')}
                 variant="outlined"
                 {...field}
                 error={!!errors.payroll?.message}
@@ -145,6 +146,9 @@ export const CreateResume = ({ user }: Props) => {
                   ))}
                 </Box>
               )}
+              MenuProps={{
+                disableScrollLock: true,
+              }}
             >
               {user?.tags?.map(tag => (
                 <MenuItem
@@ -160,6 +164,7 @@ export const CreateResume = ({ user }: Props) => {
                       remove(id);
                     }
                   }}
+                  style={getSelectedTagsStyles(tag.tag, fields)}
                 >
                   {tag.tag}
                 </MenuItem>
@@ -174,7 +179,7 @@ export const CreateResume = ({ user }: Props) => {
             render={({ field }) => (
               <InputField
                 autoComplete="off"
-                label={tr('about')}
+                label={isCandidate ? tr('about') : tr('companyAbout')}
                 variant="outlined"
                 {...field}
                 error={!!errors.about?.message}
@@ -185,7 +190,7 @@ export const CreateResume = ({ user }: Props) => {
 
           {hasContacts && (
             <FormControl>
-              <FormLabel>{tr('preferContact')}</FormLabel>
+              <ColoredFormLabel>{tr('preferContact')}</ColoredFormLabel>
               <Controller
                 name="preferContact"
                 control={control}
@@ -195,28 +200,28 @@ export const CreateResume = ({ user }: Props) => {
                       {user.phone && (
                         <FormControlLabel
                           value={user.phone}
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('phone')}
                         />
                       )}
                       {user.vkontakte && (
                         <FormControlLabel
                           value={user.vkontakte}
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('vk')}
                         />
                       )}
                       {user.telegram && (
                         <FormControlLabel
                           value={user.telegram}
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('telegram')}
                         />
                       )}
                       {user.whatsapp && (
                         <FormControlLabel
                           value={user.whatsapp}
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('whatsapp')}
                         />
                       )}
@@ -252,13 +257,17 @@ export const CreateResume = ({ user }: Props) => {
                 <RadioGroup {...field} row>
                   <FormControlLabel
                     value="true"
-                    control={<Radio />}
-                    label={tr('openedResume')}
+                    control={<ColoredRadio />}
+                    label={
+                      isCandidate ? tr('openedResume') : tr('openedVacancy')
+                    }
                   />
                   <FormControlLabel
                     value="false"
-                    control={<Radio />}
-                    label={tr('closedResume')}
+                    control={<ColoredRadio />}
+                    label={
+                      isCandidate ? tr('closedResume') : tr('closedVacancy')
+                    }
                   />
                 </RadioGroup>
               )}

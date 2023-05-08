@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   FormControl,
   FormControlLabel,
-  FormLabel,
-  Radio,
   RadioGroup,
   Typography,
 } from '@mui/material';
@@ -14,7 +12,12 @@ import { SignUpValues } from 'ducks/auth/types';
 import { useDispatch } from 'react-redux';
 import { useLazyGetMeQuery, useRegisterMutation } from 'ducks/auth/api';
 import { enter } from 'ducks/auth';
-import { InputField, PageLayout } from 'ui/style';
+import {
+  ColoredFormLabel,
+  ColoredRadio,
+  InputField,
+  PageLayout,
+} from 'ui/style';
 
 import { ROUTES } from 'constants/routes';
 
@@ -134,7 +137,7 @@ export const Register = () => {
           )}
 
           <FormControl error={!!errors.role?.message}>
-            <FormLabel>{tr('role')}</FormLabel>
+            <ColoredFormLabel>{tr('role')}</ColoredFormLabel>
             <Controller
               name="role"
               control={control}
@@ -149,12 +152,12 @@ export const Register = () => {
                 >
                   <FormControlLabel
                     value="candidate"
-                    control={<Radio />}
+                    control={<ColoredRadio />}
                     label={tr('candidate')}
                   />
                   <FormControlLabel
                     value="organization"
-                    control={<Radio />}
+                    control={<ColoredRadio />}
                     label={tr('organisation')}
                   />
                 </RadioGroup>

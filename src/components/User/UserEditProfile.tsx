@@ -7,17 +7,15 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  FormLabel,
   MenuItem,
   OutlinedInput,
-  Radio,
   RadioGroup,
   Select,
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Tag } from 'dtos/tags';
-import { InputField } from 'ui/style';
+import { ColoredFormLabel, ColoredRadio, InputField } from 'ui/style';
 import {
   Controller,
   FormProvider,
@@ -36,6 +34,7 @@ import { useSelector } from 'react-redux';
 import { selectRole } from 'ducks/auth/selectors';
 import { ImageInput } from 'ui/ImageInput';
 import { useUploadImageMutation } from 'ducks/data/api';
+import { getSelectedTagsStyles } from 'tools/helpers';
 
 import { ROUTES } from 'constants/routes';
 
@@ -192,7 +191,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                 />
 
                 <FormControl>
-                  <FormLabel>{tr('status')}</FormLabel>
+                  <ColoredFormLabel>{tr('status')}</ColoredFormLabel>
                   <Controller
                     name="status"
                     control={control}
@@ -200,12 +199,12 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                       <RadioGroup {...field} row>
                         <FormControlLabel
                           value="true"
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('lookingFor')}
                         />
                         <FormControlLabel
                           value="false"
-                          control={<Radio />}
+                          control={<ColoredRadio />}
                           label={tr('notLookingFor')}
                         />
                       </RadioGroup>
@@ -287,6 +286,9 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                         ))}
                       </Box>
                     )}
+                    MenuProps={{
+                      disableScrollLock: true,
+                    }}
                   >
                     {tags.map(tag => (
                       <MenuItem
@@ -302,6 +304,7 @@ export const UserEditProfile = ({ user, tags }: Props) => {
                             remove(id);
                           }
                         }}
+                        style={getSelectedTagsStyles(tag.tag, fields)}
                       >
                         {tag.tag}
                       </MenuItem>

@@ -31,7 +31,7 @@ export const userApi = createApi({
     }),
     updateUser: build.mutation<void, SettingsValues>({
       query: user => ({
-        url: API_ENDPOINTS.INFO,
+        url: `${API_ENDPOINTS.ME}${API_ENDPOINTS.INFO}`,
         method: 'patch',
         data: {
           ...user,
@@ -52,7 +52,7 @@ export const userApi = createApi({
       { firstName: string; lastName: string; id: string; image: string | null }
     >({
       query: user => ({
-        url: API_ENDPOINTS.USER + `/${user.id}`,
+        url: API_ENDPOINTS.USERS + `/${user.id}`,
         method: 'patch',
         data: {
           firstName: user.firstName,
@@ -64,7 +64,7 @@ export const userApi = createApi({
     }),
     createResume: build.mutation<void, ResumeValues>({
       query: resume => ({
-        url: API_ENDPOINTS.RESUME,
+        url: API_ENDPOINTS.JOB,
         method: 'post',
         data: {
           ...resume,
@@ -80,21 +80,21 @@ export const userApi = createApi({
     }),
     getResumes: build.query<ServerResumesResponse, void>({
       query: () => ({
-        url: API_ENDPOINTS.RESUME,
+        url: API_ENDPOINTS.JOB,
         method: 'get',
       }),
       providesTags: ['Resumes'],
     }),
     deleteResume: build.mutation<void, string>({
       query: id => ({
-        url: `${API_ENDPOINTS.RESUME}/${id}`,
+        url: `${API_ENDPOINTS.JOB}/${id}`,
         method: 'delete',
       }),
       invalidatesTags: ['User', 'Resumes'],
     }),
     getResume: build.query<IResume, string>({
       query: id => ({
-        url: `${API_ENDPOINTS.RESUME}/${id}`,
+        url: `${API_ENDPOINTS.JOB}/${id}`,
         method: 'get',
       }),
       providesTags: ['Resumes'],
@@ -104,7 +104,7 @@ export const userApi = createApi({
       { resume: ResumeValues; resumeId: string }
     >({
       query: ({ resumeId, resume }) => ({
-        url: `${API_ENDPOINTS.RESUME}/${resumeId}`,
+        url: `${API_ENDPOINTS.JOB}/${resumeId}`,
         method: 'patch',
         data: {
           ...resume,
@@ -120,10 +120,10 @@ export const userApi = createApi({
     }),
     favourResume: build.mutation<void, { userId: string; resumeId: string }>({
       query: ({ resumeId, userId }) => ({
-        url: `${API_ENDPOINTS.USER}/${userId}`,
+        url: `${API_ENDPOINTS.USERS}/${userId}`,
         method: 'patch',
         data: {
-          resumeId,
+          favourite: resumeId,
         },
       }),
       invalidatesTags: ['User', 'Resumes'],

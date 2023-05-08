@@ -29,10 +29,14 @@ export const CreateResumePage = () => {
     return <CircularProgress />;
   }
 
+  const isCandidate = user.role === 'candidate';
+
   return (
     <PageLayout>
       <Box display="flex" flexDirection="column" gap="20px">
-        <PageTitle>{tr('createResume')}</PageTitle>
+        <PageTitle>
+          {isCandidate ? tr('createResume') : tr('createVacancy')}
+        </PageTitle>
         <CreateResume user={user} />
       </Box>
     </PageLayout>
