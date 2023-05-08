@@ -29,8 +29,7 @@ import {
   useDeleteResumeMutation,
   useUpdateResumeMutation,
 } from 'ducks/user/api';
-
-import { getSelectedTagsStyles } from '../../tools/helpers';
+import { getSelectedTagsStyles } from 'tools/helpers';
 
 import { resumeValidationSchema } from './resumeValidationSchema';
 
