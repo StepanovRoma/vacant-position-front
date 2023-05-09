@@ -44,7 +44,7 @@ export const ResumeView = ({ resume }: Props) => {
   return (
     <Box display="flex" flexDirection="column" gap="30px">
       <Table>
-        <TableBody style={{ maxWidth: '150px' }}>
+        <TableBody>
           <TableRow>
             <TableCell>{resumeTr('user')}</TableCell>
             <TableCell>
