@@ -3,10 +3,9 @@ import { Box, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { InputField } from 'ui/style';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { isEqual } from 'lodash';
+import { useI18n } from 'hooks/useI18n';
 
 import { COLOR_PALETTE } from 'constants/theme';
-
-import { useI18n } from '../../hooks/useI18n';
 
 import { SearchParams } from './types';
 import { defaultExtendedSearch } from './helpers';
