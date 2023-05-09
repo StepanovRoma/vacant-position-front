@@ -166,5 +166,17 @@
   "404": {
     "pageNotFound": "Страница не найдена",
     "backToHome": "Вернуться домой"
+  },
+  "search": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "payroll": "Заработная плата",
+    "experience": "Опыт работы",
+    "position": "Должность",
+    "resume": "Резюме",
+    "vacancy": "Вакансии",
+    "cancel": "Отмена",
+    "clear": "Отчистить",
+    "confirm": "Принять"
   }
 }

@@ -1,6 +1,5 @@
 import { Tag } from 'dtos/tags';
-
-import { IResume } from '../../dtos/resume';
+import { IResume } from 'dtos/resume';
 
 export interface SettingsValues {
   firstName: string;
@@ -18,18 +17,18 @@ export interface SettingsValues {
   file: FileList;
 }
 
-type TWhichFirst = 'resume' | 'vacancy';
+export type TWhichFirst = 'resume' | 'vacancy';
 
 export interface ExtendedSearchParams {
-  requiredParameter: string;
-  city: string;
-  firstName: string;
-  lastName: string;
-  payroll: string;
-  experience: string;
-  position: string;
-  tags: Tag[];
-  isNew: boolean;
+  requiredParameter?: string;
+  city?: string;
+  firstName?: string;
+  lastName?: string;
+  payroll?: string;
+  experience?: string;
+  position?: string;
+  tags?: Tag[];
+  isNew?: boolean;
   whichFirst: TWhichFirst | TWhichFirst[];
 }
 

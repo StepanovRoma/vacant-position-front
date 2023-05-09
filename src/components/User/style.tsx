@@ -95,3 +95,14 @@ export const CreateResumeContainer = styled(Box)`
   box-sizing: border-box;
   border-radius: 4px;
 `;
+
+export const ResumeContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  @media (max-width: 800px) {
+    justify-content: center;
+  }
+`;

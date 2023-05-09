@@ -1,26 +1,48 @@
 import React, { useEffect } from 'react';
 import { Box, CircularProgress, Grid } from '@mui/material';
-import { useLazyGetSearchJobsQuery } from 'ducks/user/api';
+import { useLazyGetExtendedSearchJobsQuery } from 'ducks/user/api';
+import { SearchParams } from 'components/Search/types';
+import { ListResumeCard, TableResumeCard } from 'components/Resume';
 
-import { ListResumeCard, TableResumeCard } from '../Resume';
+import { getJobSearchRoles } from './helpers';
 
 interface Props {
   isTableView: boolean;
   requiredParameter?: string;
   city?: string;
+  extendedSearchParams: SearchParams;
 }
 
 export const JobsContainer = ({
   isTableView,
   requiredParameter,
   city,
+  extendedSearchParams,
 }: Props) => {
   const [getJobs, { data: jobs, isLoading: isLoadingResumes, isSuccess }] =
-    useLazyGetSearchJobsQuery();
+    useLazyGetExtendedSearchJobsQuery();
 
   useEffect(() => {
-    getJobs({ requiredParameter, city });
-  }, [city, getJobs, requiredParameter]);
+    const {
+      resume,
+      vacancy,
+      lastName,
+      firstName,
+      payroll,
+      position,
+      experience,
+    } = extendedSearchParams;
+    getJobs({
+      requiredParameter,
+      city,
+      whichFirst: getJobSearchRoles(resume, vacancy),
+      lastName,
+      firstName,
+      payroll,
+      position,
+      experience,
+    });
+  }, [city, getJobs, requiredParameter, extendedSearchParams]);
 
   if (!isSuccess || isLoadingResumes || !jobs) {
     return <CircularProgress />;
@@ -31,13 +53,19 @@ export const JobsContainer = ({
   return (
     <Box>
       {isTableView ? (
-        <Grid container spacing={6}>
+        <Box
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '48px',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           {allJobs.map(job => (
-            <Grid item key={job.id}>
-              <TableResumeCard resume={job} />
-            </Grid>
+            <TableResumeCard resume={job} key={job.id} />
           ))}
-        </Grid>
+        </Box>
       ) : (
         <Grid container spacing={6}>
           {allJobs.map(job => (

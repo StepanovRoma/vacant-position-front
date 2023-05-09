@@ -124,7 +124,7 @@ export const userApi = createApi({
     }),
     favourResume: build.mutation<void, string>({
       query: resumeId => ({
-        url: `${API_ENDPOINTS.USERS}/${API_ENDPOINTS.FAVOURITE}`,
+        url: `${API_ENDPOINTS.USERS}${API_ENDPOINTS.FAVOURITE}`,
         method: 'patch',
         data: {
           favourite: resumeId,

@@ -5,10 +5,12 @@ import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
 import { JobsContainer } from 'components/Jobs/JobsContainer';
 import { useSelector } from 'react-redux';
+import { selectIsAuth, selectUserCity } from 'ducks/auth/selectors';
+import { ExtendedSearch } from 'components/Search/Search';
+import { SearchParams } from 'components/Search/types';
+import { defaultExtendedSearch } from 'components/Search/helpers';
 
 import { placeHolders } from 'constants/placeHolders';
-
-import { selectIsAuth, selectUserCity } from '../ducks/auth/selectors';
 
 import {
   FirstTableView,
@@ -36,6 +38,10 @@ export const HomePage = () => {
   const userCity = useSelector(selectUserCity);
   const [city, setCity] = useState<undefined | string>();
   const isAuth = useSelector(selectIsAuth);
+  const [isExtendedSearchOpen, setIsExtendedSearchOpen] =
+    useState<boolean>(false);
+  const [extendedSearchParams, setExtendedSearchParams] =
+    useState<SearchParams>(defaultExtendedSearch);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.length === 0) {
@@ -49,6 +55,10 @@ export const HomePage = () => {
     if (city !== null) {
       setCity(city);
     }
+  };
+
+  const handleToggleExtendedSearch = () => {
+    setIsExtendedSearchOpen(prevState => !prevState);
   };
 
   useEffect(() => {
@@ -88,7 +98,10 @@ export const HomePage = () => {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <SearchButtons variant="contained">
+            <SearchButtons
+              variant="contained"
+              onClick={handleToggleExtendedSearch}
+            >
               {tr('extendedSearch')}
             </SearchButtons>
             <SearchCityContainer>
@@ -119,8 +132,20 @@ export const HomePage = () => {
           </Box>
         </Box>
       </HomePageContainer>
-      <HomePageLayout display="flex" flexDirection="column">
-        <Box display="flex" flexDirection="row" justifyContent="flex-end">
+      <HomePageLayout display="flex" flexDirection="column" alignItems="center">
+        {isExtendedSearchOpen && (
+          <ExtendedSearch
+            handleCloseSearch={handleToggleExtendedSearch}
+            setExtendedSearchParams={setExtendedSearchParams}
+            extendedSearchParams={extendedSearchParams}
+          />
+        )}
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="flex-end"
+          width="100%"
+        >
           <Tooltip title={isTableView ? tr('table') : tr('list')} arrow>
             <SwitchViewButton
               onClick={() => {
@@ -135,6 +160,7 @@ export const HomePage = () => {
           isTableView={isTableView}
           requiredParameter={requiredParameter}
           city={city}
+          extendedSearchParams={extendedSearchParams}
         />
       </HomePageLayout>
     </>
