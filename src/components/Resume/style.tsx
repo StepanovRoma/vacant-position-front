@@ -108,7 +108,7 @@ export const FavoriteButton = styled(IconButton)`
 
 export const ResumeListCard = styled(Card)`
   width: calc(100vw - 180px);
-  height: 255px;
+  height: 100%;
   background-color: ${COLOR_PALETTE.cardPrimary};
   @media (max-width: 790px) {
     width: calc(100vw - 75px);
@@ -198,7 +198,7 @@ export const ActionContainer = styled(Box)`
   display: flex;
   flex-direction: row;
   gap: 5px;
-  align-items: center;
+  align-self: flex-end;
 `;
 
 export const ListCustomGrid = styled(Grid)`

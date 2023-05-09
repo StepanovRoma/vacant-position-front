@@ -79,14 +79,14 @@ export const ListResumeCard = ({ resume }: Props) => {
               <LongWordContainer>{resume.experience}</LongWordContainer>
               <LongWordContainer>{resume.payroll}</LongWordContainer>
             </Box>
-            <LongAboutContainer>{resume.about}</LongAboutContainer>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'flex-end',
+                flex: '1',
               }}
             >
+              <LongAboutContainer>{resume.about}</LongAboutContainer>
               <ActionContainer>
                 <MoreButton
                   variant="contained"
