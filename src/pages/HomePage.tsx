@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { Box, CircularProgress, Grid, Tooltip } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, CircularProgress, Tooltip } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useI18n } from 'hooks/useI18n';
 import { useGetRandomQuoteQuery } from 'ducks/quote/api';
-import { ListResumeCard, TableResumeCard } from 'components/Resume';
+import { JobsContainer } from 'components/Jobs/JobsContainer';
+import { useSelector } from 'react-redux';
+import { selectIsAuth, selectUserCity } from 'ducks/auth/selectors';
+import { ExtendedSearch } from 'components/Search/Search';
+import { SearchParams } from 'components/Search/types';
+import { defaultExtendedSearch } from 'components/Search/helpers';
 
 import { placeHolders } from 'constants/placeHolders';
-
-import { useGetResumesQuery } from '../ducks/user/api';
 
 import {
   FirstTableView,
@@ -28,17 +31,40 @@ export const HomePage = () => {
   const tr = useI18n('home');
   const { data: quote, isFetching: isFetchingQuote } = useGetRandomQuoteQuery();
   const [isTableView, setIsTableView] = useState(true);
-  const {
-    data: resumes,
-    isFetching: isFetchingResumes,
-    isSuccess,
-    isError,
-  } = useGetResumesQuery();
+  const [searchState, setSearchState] = useState<undefined | string>();
+  const [requiredParameter, setRequiredParameter] = useState<
+    undefined | string
+  >();
+  const userCity = useSelector(selectUserCity);
+  const [city, setCity] = useState<undefined | string>();
+  const isAuth = useSelector(selectIsAuth);
+  const [isExtendedSearchOpen, setIsExtendedSearchOpen] =
+    useState<boolean>(false);
+  const [extendedSearchParams, setExtendedSearchParams] =
+    useState<SearchParams>(defaultExtendedSearch);
 
-  //todo move in separate component
-  if (!isSuccess || isFetchingResumes || isError) {
-    return <CircularProgress />;
-  }
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length === 0) {
+      setSearchState(undefined);
+    } else {
+      setSearchState(event.target.value);
+    }
+  };
+
+  const handleClickCity = (city?: string) => {
+    if (city !== null) {
+      setCity(city);
+    }
+  };
+
+  const handleToggleExtendedSearch = () => {
+    setIsExtendedSearchOpen(prevState => !prevState);
+  };
+
+  useEffect(() => {
+    const timeOutId = setTimeout(() => setRequiredParameter(searchState), 300);
+    return () => clearTimeout(timeOutId);
+  }, [searchState]);
 
   return (
     <>
@@ -62,29 +88,64 @@ export const HomePage = () => {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase placeholder={tr('searchPlaceHolder')} />
+            <StyledInputBase
+              placeholder={tr('searchPlaceHolder')}
+              onChange={handleSearchChange}
+            />
           </Search>
           <Box
             display="flex"
             flexDirection="row"
             justifyContent="space-between"
           >
-            <SearchButtons variant="contained">
+            <SearchButtons
+              variant="contained"
+              onClick={handleToggleExtendedSearch}
+            >
               {tr('extendedSearch')}
             </SearchButtons>
             <SearchCityContainer>
-              <SearchButtons variant="contained">
+              <SearchButtons
+                variant="contained"
+                onClick={() => handleClickCity()}
+              >
                 {tr('allCities')}
               </SearchButtons>
-              <StyledDivider orientation="vertical" flexItem />
-              <SearchButtons variant="contained">{'Новосибирск'}</SearchButtons>
-              <SearchButtons variant="contained">{tr('difCity')}</SearchButtons>
+              {isAuth && (
+                <>
+                  <StyledDivider orientation="vertical" flexItem />
+                  {userCity && (
+                    <SearchButtons
+                      variant="contained"
+                      value="Новосибирск"
+                      onClick={() => handleClickCity(userCity)}
+                    >
+                      {userCity}
+                    </SearchButtons>
+                  )}
+                  <SearchButtons variant="contained" disabled>
+                    {tr('difCity')}
+                  </SearchButtons>
+                </>
+              )}
             </SearchCityContainer>
           </Box>
         </Box>
       </HomePageContainer>
-      <HomePageLayout display="flex" flexDirection="column">
-        <Box display="flex" flexDirection="row" justifyContent="flex-end">
+      <HomePageLayout display="flex" flexDirection="column" alignItems="center">
+        {isExtendedSearchOpen && (
+          <ExtendedSearch
+            handleCloseSearch={handleToggleExtendedSearch}
+            setExtendedSearchParams={setExtendedSearchParams}
+            extendedSearchParams={extendedSearchParams}
+          />
+        )}
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="flex-end"
+          width="100%"
+        >
           <Tooltip title={isTableView ? tr('table') : tr('list')} arrow>
             <SwitchViewButton
               onClick={() => {
@@ -95,25 +156,12 @@ export const HomePage = () => {
             </SwitchViewButton>
           </Tooltip>
         </Box>
-        <Box>
-          {isTableView ? (
-            <Grid container spacing={6}>
-              {resumes.resume.map(resume => (
-                <Grid item key={resume.id}>
-                  <TableResumeCard resume={resume} />
-                </Grid>
-              ))}
-            </Grid>
-          ) : (
-            <Grid container spacing={6}>
-              {resumes.resume.map(resume => (
-                <Grid item key={resume.id}>
-                  <ListResumeCard resume={resume} />
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </Box>
+        <JobsContainer
+          isTableView={isTableView}
+          requiredParameter={requiredParameter}
+          city={city}
+          extendedSearchParams={extendedSearchParams}
+        />
       </HomePageLayout>
     </>
   );

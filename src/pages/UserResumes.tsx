@@ -1,7 +1,11 @@
 import React from 'react';
 import { PageLayout, PageTitle } from 'ui/style';
-import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material';
-import { CreateResumeContainer, Link } from 'components/User/style';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import {
+  CreateResumeContainer,
+  Link,
+  ResumeContainer,
+} from 'components/User/style';
 import { useI18n } from 'hooks/useI18n';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -36,24 +40,20 @@ export const UserResumes = () => {
       <Box display="flex" flexDirection="column" gap="20px">
         <PageTitle>{isCandidate ? tr('myResumes') : 'Мои вакансии'}</PageTitle>
         {user.resumes.length > 0 ? (
-          <Grid container spacing={6}>
+          <ResumeContainer>
             {user.resumes.map(resume => (
-              <Grid item key={resume.id}>
-                <TableResumeCard resume={resume} isMy />
-              </Grid>
+              <TableResumeCard resume={resume} isMy key={resume.id} />
             ))}
-            <Grid item>
-              <CreateResumeContainer>
-                <Link to={ROUTES.CREATE_RESUME}>
-                  <Button variant="text">
-                    {isCandidate
-                      ? tr('createOneMoreResume')
-                      : tr('createOneMoreVacancy')}
-                  </Button>
-                </Link>
-              </CreateResumeContainer>
-            </Grid>
-          </Grid>
+            <CreateResumeContainer>
+              <Link to={ROUTES.CREATE_RESUME}>
+                <Button variant="text">
+                  {isCandidate
+                    ? tr('createOneMoreResume')
+                    : tr('createOneMoreVacancy')}
+                </Button>
+              </Link>
+            </CreateResumeContainer>
+          </ResumeContainer>
         ) : (
           <Box display="flex" flexDirection="row" alignItems="center" gap="6px">
             <Typography>{tr('noExistsResume')}</Typography>

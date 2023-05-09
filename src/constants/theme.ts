@@ -10,4 +10,5 @@ export const COLOR_PALETTE = {
   cardSecondary: '#F3C178',
   purple: '#CBA3FF',
   darkPurple: '#AE6EFF',
+  lightGrey: '#F0F0F0',
 };

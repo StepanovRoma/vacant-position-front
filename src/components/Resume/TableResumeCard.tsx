@@ -9,10 +9,13 @@ import {
   Modal,
   Button,
 } from '@mui/material';
-import { Delete, Edit, Star } from '@mui/icons-material';
+import { Delete, Edit, Star, StarBorderSharp } from '@mui/icons-material';
 import { useI18n } from 'hooks/useI18n';
 import { format } from 'date-fns';
-import { useDeleteResumeMutation } from 'ducks/user/api';
+import {
+  useDeleteResumeMutation,
+  useFavourResumeMutation,
+} from 'ducks/user/api';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from 'constants/routes';
@@ -44,6 +47,7 @@ interface Props {
 export const TableResumeCard = ({ resume, isMy }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [deleteResume] = useDeleteResumeMutation();
+  const [toggleFavourite] = useFavourResumeMutation();
   const tr = useI18n('resume');
   const modalTr = useI18n('resume.modal');
   const navigate = useNavigate();
@@ -59,6 +63,10 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
 
   const handleClose = () => {
     setIsOpenModal(false);
+  };
+
+  const handleFavouriteClick = () => {
+    toggleFavourite(resume.id);
   };
 
   return (
@@ -127,8 +135,8 @@ export const TableResumeCard = ({ resume, isMy }: Props) => {
             {isCandidate ? tr('showResume') : tr('showVacancy')}
           </MoreButton>
           {!isMy && (
-            <FavoriteButton>
-              <Star />
+            <FavoriteButton onClick={handleFavouriteClick}>
+              {resume.isFavourite ? <Star /> : <StarBorderSharp />}
             </FavoriteButton>
           )}
         </ActionsContainer>

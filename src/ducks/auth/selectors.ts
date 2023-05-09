@@ -13,3 +13,7 @@ export const selectRole = (state: RootState) => {
 export const selectImage = (state: RootState) => {
   return state.auth.user?.image;
 };
+
+export const selectUserCity = (state: RootState) => {
+  return state.auth.user?.city;
+};

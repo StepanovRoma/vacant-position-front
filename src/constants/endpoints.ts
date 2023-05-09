@@ -13,4 +13,5 @@ export const API_ENDPOINTS = {
   COMMENTS: '/comments',
   ACCESS_TOKEN: '/access_token',
   SEARCH: '/search',
+  FAVOURITE: '/favourite',
 };

@@ -10,6 +10,7 @@ export interface ServerUserBodyResponse {
   updatedAt: string;
   image: null | string;
   role: 'organization' | 'candidate';
+  city: null | string;
 }
 
 export interface ServerUserMeResponse {

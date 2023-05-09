@@ -3,8 +3,9 @@ import { IResume } from 'dtos/resume';
 import { Box, Grid } from '@mui/material';
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import { Star } from '@mui/icons-material';
+import { Star, StarBorderSharp } from '@mui/icons-material';
 import { useI18n } from 'hooks/useI18n';
+import { useFavourResumeMutation } from 'ducks/user/api';
 
 import { ROUTES } from 'constants/routes';
 import { API_BASE_URL } from 'constants/endpoints';
@@ -38,6 +39,12 @@ export const ListResumeCard = ({ resume }: Props) => {
     ? resume.firstName
     : `${resume.firstName} ${resume.lastName}`;
   const tr = useI18n('resume');
+  const [toggleFavourite] = useFavourResumeMutation();
+
+  const handleFavouriteClick = () => {
+    toggleFavourite(resume.id);
+  };
+
   return (
     <ResumeListCard>
       <ListCardContainer>
@@ -72,14 +79,14 @@ export const ListResumeCard = ({ resume }: Props) => {
               <LongWordContainer>{resume.experience}</LongWordContainer>
               <LongWordContainer>{resume.payroll}</LongWordContainer>
             </Box>
-            <LongAboutContainer>{resume.about}</LongAboutContainer>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'flex-end',
+                flex: '1',
               }}
             >
+              <LongAboutContainer>{resume.about}</LongAboutContainer>
               <ActionContainer>
                 <MoreButton
                   variant="contained"
@@ -89,8 +96,8 @@ export const ListResumeCard = ({ resume }: Props) => {
                 >
                   {tr('detail')}
                 </MoreButton>
-                <FavoriteButton>
-                  <Star />
+                <FavoriteButton onClick={handleFavouriteClick}>
+                  {resume.isFavourite ? <Star /> : <StarBorderSharp />}
                 </FavoriteButton>
               </ActionContainer>
             </Box>

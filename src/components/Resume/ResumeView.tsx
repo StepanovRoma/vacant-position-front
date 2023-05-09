@@ -55,7 +55,9 @@ export const ResumeView = ({ resume }: Props) => {
           </TableRow>
           <TableRow>
             <TableCell>{resumeTr('position')}</TableCell>
-            <TableCell>{position}</TableCell>
+            <TableCell style={{ wordBreak: 'break-word' }}>
+              {position}
+            </TableCell>
           </TableRow>
           <TableRow>
             <TableCell>{resumeTr('experience')}</TableCell>
@@ -63,7 +65,7 @@ export const ResumeView = ({ resume }: Props) => {
           </TableRow>
           <TableRow>
             <TableCell>{resumeTr('payroll')}</TableCell>
-            <TableCell>{payroll}</TableCell>
+            <TableCell style={{ wordBreak: 'break-word' }}>{payroll}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell>{resumeTr('contact')}</TableCell>

@@ -9,7 +9,12 @@ import { selectMeId } from 'ducks/auth/selectors';
 
 import { ROUTES } from 'constants/routes';
 
-import { CreateResumeContainer, Link, TagContainer } from './style';
+import {
+  CreateResumeContainer,
+  Link,
+  ResumeContainer,
+  TagContainer,
+} from './style';
 
 interface Props {
   user: TUser;
@@ -82,29 +87,26 @@ export const Personal = ({ user }: Props) => {
           {isCandidate ? tr('openСV') : tr('openVacancy')}
         </Typography>
         {user.resumes.length !== 0 ? (
-          <Grid container spacing={6}>
+          <ResumeContainer>
             {user.resumes.map(resume => (
-              <Grid item key={resume.id}>
-                <TableResumeCard
-                  resume={resume}
-                  isMy={myId === resume.userId}
-                />
-              </Grid>
+              <TableResumeCard
+                resume={resume}
+                isMy={myId === resume.userId}
+                key={resume.id}
+              />
             ))}
             {myId === user.id && (
-              <Grid item>
-                <CreateResumeContainer>
-                  <Link to={ROUTES.CREATE_RESUME}>
-                    <Button variant="text">
-                      {isCandidate
-                        ? resumeTr('createOneMoreResume')
-                        : resumeTr('createOneMoreVacancy')}
-                    </Button>
-                  </Link>
-                </CreateResumeContainer>
-              </Grid>
+              <CreateResumeContainer>
+                <Link to={ROUTES.CREATE_RESUME}>
+                  <Button variant="text">
+                    {isCandidate
+                      ? resumeTr('createOneMoreResume')
+                      : resumeTr('createOneMoreVacancy')}
+                  </Button>
+                </Link>
+              </CreateResumeContainer>
             )}
-          </Grid>
+          </ResumeContainer>
         ) : (
           <Box display="flex" flexDirection="row" alignItems="center" gap="6px">
             <Typography>
