@@ -14,4 +14,5 @@ export const API_ENDPOINTS = {
   ACCESS_TOKEN: '/access_token',
   SEARCH: '/search',
   FAVOURITE: '/favourite',
+  WITH_PARAMS: '/with_params',
 };
