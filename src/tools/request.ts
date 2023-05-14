@@ -9,7 +9,7 @@ import { getAuthToken } from './helpers';
 export const request = applyCaseMiddleware(
   axios.create({
     baseURL: API_BASE_URL,
-    //withCredentials: true,
+    withCredentials: true,
   }),
 );
 

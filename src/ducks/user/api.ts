@@ -151,7 +151,7 @@ export const userApi = createApi({
       ExtendedSearchParams
     >({
       query: searchParams => ({
-        url: `${API_ENDPOINTS.SEARCH}/with-params`,
+        url: `${API_ENDPOINTS.SEARCH}${API_ENDPOINTS.WITH_PARAMS}`,
         method: 'get',
         params: { ...searchParams },
       }),
