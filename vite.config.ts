@@ -9,5 +9,6 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
     outDir: path.join(__dirname, 'build'),
+    chunkSizeWarningLimit: 1500,
   },
 });
