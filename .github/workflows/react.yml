@@ -22,13 +22,13 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
+        cache: 'pnpm'
         
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: pnpm i --frozen-lockfile
       
     - name: Linter check
-      run: yarn eslint ./src
+      run: pnpm eslint ./src
       
     - name: Build
-      run: yarn build
+      run: pnpm build
