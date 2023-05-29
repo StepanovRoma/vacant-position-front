@@ -8,6 +8,6 @@ import path from 'path';
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   build: {
-    chunkSizeWarningLimit: 1500,
+    outDir: path.join(__dirname, 'build'),
   },
 });
