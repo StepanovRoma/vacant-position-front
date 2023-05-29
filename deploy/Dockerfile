@@ -2,19 +2,25 @@ FROM node:18-alpine as build
 WORKDIR /build
 
 COPY package.json .
-COPY yarn.lock .
+COPY pnpm-lock.yaml .
 
-RUN yarn install
+RUN apk update &&\
+    apk upgrade &&\
+    npm install -g pnpm &&\
+    pnpm i
 
 COPY . .
 
 ARG API_BASE_URL
 ENV VITE_APP_API_BASE_URL $API_BASE_URL
 
-RUN yarn build
+RUN pnpm build
 
 FROM nginx:alpine as prod
 WORKDIR /app
+
+RUN apk update &&\
+    apk upgrade
 
 COPY ./deploy/nginx.conf /etc/nginx/nginx.conf
 
